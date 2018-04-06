@@ -1,4 +1,4 @@
-package no.ntnu.imt3673.group2.colorblindnesstest;
+package no.ntnu.imt3673.group2.colourvisiondeficiencytest;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("no.ntnu.imt3673.group2.colorblindnesstest", appContext.getPackageName());
+        assertEquals("no.ntnu.imt3673.group2.colourvisiondeficiencytest", appContext.getPackageName());
     }
 }

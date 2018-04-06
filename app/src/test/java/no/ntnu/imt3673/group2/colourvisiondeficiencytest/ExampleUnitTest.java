@@ -1,4 +1,4 @@
-package no.ntnu.imt3673.group2.colorblindnesstest;
+package no.ntnu.imt3673.group2.colourvisiondeficiencytest;
 
 import org.junit.Test;
 

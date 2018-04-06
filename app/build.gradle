@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "no.ntnu.imt3673.group2.colorblindnesstest"
+        applicationId "no.ntnu.imt3673.group2.colourvisiondeficiencytest"
         minSdkVersion 23
         targetSdkVersion 26
         versionCode 1
