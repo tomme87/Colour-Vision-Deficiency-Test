@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="no.ntnu.imt3673.group2.colourvisiondeficiencytest.MainActivity">
+    tools:context="no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.MainActivity">
 
     <TextView
         android:layout_width="wrap_content"
