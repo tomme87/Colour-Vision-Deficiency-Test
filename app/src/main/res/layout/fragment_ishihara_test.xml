@@ -8,12 +8,16 @@
     <ImageView
         android:id="@+id/iv_ishihara_test_plate_picture"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="false"
+        android:contentDescription="@string/ishihara_test_plate_image_description" />
 
     <EditText
         android:id="@+id/et_ishihare_test_input"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:hint="@string/ishihara_test_plate_input"
+        android:inputType="numberSigned" />
 
     <Button
         android:id="@+id/btn_ishihara_test_button"

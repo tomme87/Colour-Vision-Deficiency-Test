@@ -8,4 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Greyscale Theme for the test activity -->
+    <style name="AppGreyscale" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize the theme here. -->
+        <item name="colorPrimary">@color/colorCustomPrimary</item>
+        <item name="colorPrimaryDark">@color/colorCustomPrimaryDark</item>
+        <item name="colorAccent">@color/colorCustomAccent</item>
+    </style>
+
 </resources>

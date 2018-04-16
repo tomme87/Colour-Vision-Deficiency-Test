@@ -16,7 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ishihara.IshiharaTestActivity"></activity>
+        <activity android:name=".ishihara.IshiharaTestActivity"
+            android:theme="@style/AppGreyscale"></activity>
     </application>
 
 </manifest>
