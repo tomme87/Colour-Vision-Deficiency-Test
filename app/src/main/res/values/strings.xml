@@ -3,4 +3,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="url_test_list">http://folk.ntnu.no/tomaszmr/md/TestList.json</string>
+    <string name="btn_download_text">Download</string>
 </resources>

@@ -6,6 +6,7 @@ import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity (
@@ -14,6 +15,7 @@ import java.util.Date;
 public class TestInfo {
 
     @PrimaryKey
+    @NonNull
     private String id;
 
     @Nullable
@@ -23,10 +25,10 @@ public class TestInfo {
     private String description;
 
     @NonNull
-    private String resources;       // zip url
+    private String resourceUrl;       // zip url
 
     @Nullable
-    private String resultServer;    // POST results url
+    private String resultsUrl;    // POST results url
 
     @Nullable
     private Integer firstPlate;
@@ -35,7 +37,7 @@ public class TestInfo {
     private String type;
 
     @Nullable
-    private Date created;
+    private Timestamp created;
 
     @Nullable
     private Integer version;
@@ -51,14 +53,14 @@ public class TestInfo {
             String resultServer,
             Integer firstPlate,
             String type,
-            Date created,
+            Timestamp created,
             Integer version
     ) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.resources = resources;
-        this.resultServer = resultServer;
+        this.resourceUrl = resources;
+        this.resultsUrl = resultServer;
         this.firstPlate = firstPlate;
         this.type = type;
         this.created = created;
@@ -89,20 +91,22 @@ public class TestInfo {
         this.description = description;
     }
 
-    public String getResources() {
-        return resources;
+    @NonNull
+    public String getResourceUrl() {
+        return resourceUrl;
     }
 
-    public void setResources(String resources) {
-        this.resources = resources;
+    public void setResourceUrl(@NonNull String resourceUrl) {
+        this.resourceUrl = resourceUrl;
     }
 
-    public String getResultServer() {
-        return resultServer;
+    @Nullable
+    public String getResultsUrl() {
+        return resultsUrl;
     }
 
-    public void setResultServer(String resultServer) {
-        this.resultServer = resultServer;
+    public void setResultsUrl(@Nullable String resultsUrl) {
+        this.resultsUrl = resultsUrl;
     }
 
     public Integer getFirstPlate() {
@@ -121,11 +125,12 @@ public class TestInfo {
         this.type = type;
     }
 
-    public Date getCreated() {
+    @Nullable
+    public Timestamp getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(@Nullable Timestamp created) {
         this.created = created;
     }
 

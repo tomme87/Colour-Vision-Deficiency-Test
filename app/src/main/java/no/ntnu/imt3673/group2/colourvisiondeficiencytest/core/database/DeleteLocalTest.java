@@ -2,6 +2,7 @@ package no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.database;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
  */
 public class DeleteLocalTest extends AsyncTask <TestInfo, Void, List<TestInfo>> {
 
+    private static final String TAG = "DeleteLocalTest";
     private Context appContext;
 
     // passing application context from service accessing db
@@ -42,5 +44,7 @@ public class DeleteLocalTest extends AsyncTask <TestInfo, Void, List<TestInfo>> 
     protected void onPostExecute(List<TestInfo> testInfoList) {
         super.onPostExecute(testInfoList);
         // TODO: update LocalTestList
+
+        Log.d(TAG, "Size: "+ testInfoList.size());
     }
 }

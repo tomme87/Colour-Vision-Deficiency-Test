@@ -5,8 +5,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.R;
+import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
 
 /**
  * Created by Tomme on 12.04.2018.
@@ -14,9 +20,22 @@ import no.ntnu.imt3673.group2.colourvisiondeficiencytest.R;
 
 public class TestListAdapter extends RecyclerView.Adapter<TestListAdapter.TestListViewHolder> {
     private final LayoutInflater inflater;
+    private List<TestInfo> testInfos;
 
-    TestListAdapter(Context context) {
+    public TestListAdapter(Context context, List<TestInfo> testInfos) {
         this.inflater = LayoutInflater.from(context);
+        this.testInfos = testInfos;
+    }
+
+    public void setTestInfos(TestInfo[] testInfos) {
+        //this.testInfos = new ArrayList<>(Arrays.asList(testInfos));
+        this.testInfos.clear();
+        this.testInfos.addAll(Arrays.asList(testInfos));
+        notifyDataSetChanged();
+    }
+
+    public TestInfo getTestInfo(int position) {
+        return this.testInfos.get(position);
     }
 
     @Override
@@ -27,18 +46,22 @@ public class TestListAdapter extends RecyclerView.Adapter<TestListAdapter.TestLi
 
     @Override
     public void onBindViewHolder(TestListViewHolder holder, int position) {
-
+        TestInfo testInfo = testInfos.get(position);
+        holder.name.setText(testInfo.getName());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return testInfos.size();
     }
 
     static class TestListViewHolder extends RecyclerView.ViewHolder {
 
+        TextView name;
+
         public TestListViewHolder(View itemView) {
             super(itemView);
+            name = itemView.findViewById(R.id.tv_test_item_name);
         }
     }
 }
