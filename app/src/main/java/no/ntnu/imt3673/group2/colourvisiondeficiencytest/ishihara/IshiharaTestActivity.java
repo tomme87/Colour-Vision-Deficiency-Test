@@ -4,9 +4,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.R;
-import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.fragments.LocalTestListFragment;
+import no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara.fragments.IshiharaTestFragment;
 
 public class IshiharaTestActivity extends AppCompatActivity {
+
+    //  TODO: Create Test object that contains TestInfo and List<Plates>
+    //  TODO: Create/get ResultSet object
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,9 +17,10 @@ public class IshiharaTestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ishihara_test);
     }
 
+    /*
     public void startIshiharaTestFragment() {
         getFragmentManager().beginTransaction()
-                .replace(android.R.id.content, new LocalTestListFragment())
+                .replace(android.R.id.content, new IshiharaTestFragment.newInstance())
                 .addToBackStack(null)
                 .commit();
     }
@@ -27,4 +31,5 @@ public class IshiharaTestActivity extends AppCompatActivity {
                 .addToBackStack(null)
                 .commit();
     }
+    */
 }

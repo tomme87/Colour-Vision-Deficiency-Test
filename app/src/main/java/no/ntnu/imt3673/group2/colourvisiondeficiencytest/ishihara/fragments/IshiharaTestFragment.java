@@ -9,8 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.R;
-import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.Result;
-import no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara.IshiharaResult;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,9 +21,8 @@ import no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara.IshiharaResult
 public class IshiharaTestFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final int ARG_PLATE_COUNTER = 0;
-    private static final String ARG_PLATES_LIST = "param2";
-    private static final String ARG_TEST_RESULTS = new IshiharaResult();
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
