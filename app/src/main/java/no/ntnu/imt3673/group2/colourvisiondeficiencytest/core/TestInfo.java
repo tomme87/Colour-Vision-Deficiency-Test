@@ -36,8 +36,8 @@ public class TestInfo {
     @NonNull
     private String type;
 
-    @Nullable
-    private Timestamp created;
+    //@Nullable
+    //private Timestamp created;
 
     @Nullable
     private Integer version;
@@ -53,7 +53,7 @@ public class TestInfo {
             String resultServer,
             Integer firstPlate,
             String type,
-            Timestamp created,
+           // Timestamp created,
             Integer version
     ) {
         this.id = id;
@@ -63,7 +63,7 @@ public class TestInfo {
         this.resultsUrl = resultServer;
         this.firstPlate = firstPlate;
         this.type = type;
-        this.created = created;
+       // this.created = created;
         this.version = version;
     }
 
@@ -125,6 +125,7 @@ public class TestInfo {
         this.type = type;
     }
 
+    /*
     @Nullable
     public Timestamp getCreated() {
         return created;
@@ -133,6 +134,7 @@ public class TestInfo {
     public void setCreated(@Nullable Timestamp created) {
         this.created = created;
     }
+    */
 
     public Integer getVersion() {
         return version;
