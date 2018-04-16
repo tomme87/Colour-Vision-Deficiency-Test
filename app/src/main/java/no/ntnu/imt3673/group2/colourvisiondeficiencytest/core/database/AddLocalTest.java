@@ -33,6 +33,10 @@ public class AddLocalTest extends AsyncTask<TestInfo,Void,List<TestInfo>> {
         return testInfoDAO.getAll();
     }
 
+    /**
+     * Updates list view when done fetching data from database
+     * @param testInfoList
+     */
     @Override
     protected void onPostExecute(List<TestInfo> testInfoList) {
         super.onPostExecute(testInfoList);

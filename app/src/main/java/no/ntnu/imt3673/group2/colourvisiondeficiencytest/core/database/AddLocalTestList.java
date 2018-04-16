@@ -8,29 +8,26 @@ import java.util.List;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
 
 /**
- * Delete from database information about a test being removed from local storage
+ * Adds a list of TestInfo objects into database
  */
-public class DeleteLocalTest extends AsyncTask <TestInfo, Void, List<TestInfo>> {
+public class AddLocalTestList extends AsyncTask <List<TestInfo>, Void, List<TestInfo>> {
 
     private Context appContext;
 
     // passing application context from service accessing db
-    public DeleteLocalTest(Context appContext) {
+    public AddLocalTestList(Context appContext) {
         this.appContext = appContext;
     }
 
     /**
-     * Deletes from database all given TestInfo entries
-     * @param testInfos
-     * @return current local tests list (after deleting)
+     * Adds a list of TestInfo objects to database
+     * @param lists
+     * @return updated list of lcal tests
      */
     @Override
-    protected List<TestInfo> doInBackground(TestInfo... testInfos) {
+    protected List<TestInfo> doInBackground(List<TestInfo>[] lists) {
         TestInfoDAO testInfoDAO = AppDatabase.getAppDatabase(this.appContext).testInfoDAO();
-
-        for (TestInfo testInfo: testInfos) {
-            testInfoDAO.delete(testInfo);
-        }
+        testInfoDAO.insertAll(lists[0]);
         return testInfoDAO.getAll();
     }
 
@@ -41,6 +38,6 @@ public class DeleteLocalTest extends AsyncTask <TestInfo, Void, List<TestInfo>> 
     @Override
     protected void onPostExecute(List<TestInfo> testInfoList) {
         super.onPostExecute(testInfoList);
-        // TODO: update LocalTestList
+        //TODO: update LocalTestList
     }
 }

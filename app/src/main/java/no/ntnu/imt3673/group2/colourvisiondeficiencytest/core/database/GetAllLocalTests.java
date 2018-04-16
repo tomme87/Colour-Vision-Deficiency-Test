@@ -28,6 +28,10 @@ public class GetAllLocalTests extends AsyncTask <Void, Void, List<TestInfo>> {
         return AppDatabase.getAppDatabase(this.appContext).testInfoDAO().getAll();
     }
 
+    /**
+     * Updates list view when done fetching data from database
+     * @param testInfos
+     */
     @Override
     protected void onPostExecute(List<TestInfo> testInfos) {
         super.onPostExecute(testInfos);

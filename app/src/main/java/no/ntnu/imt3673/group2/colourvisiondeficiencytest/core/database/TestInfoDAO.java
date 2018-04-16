@@ -16,7 +16,7 @@ public interface TestInfoDAO {
     List<TestInfo> getAll();
 
     @Insert
-    void insertAll(TestInfo tests);
+    void insertAll(List<TestInfo> tests);
 
     @Insert
     void insert(TestInfo testInfo);
