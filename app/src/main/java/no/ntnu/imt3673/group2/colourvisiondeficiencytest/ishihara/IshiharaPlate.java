@@ -3,10 +3,10 @@ package no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.Plate;
 
 public class IshiharaPlate extends Plate {
-    private int normal;
-    private int protanStrong;
-    private int deutanStrong;
-    private int total;
+    private Integer normal;
+    private Integer protanStrong;
+    private Integer deutanStrong;
+    private Integer total;
     private boolean extra;
 
     public IshiharaPlate() {
@@ -21,35 +21,35 @@ public class IshiharaPlate extends Plate {
         this.extra = extra;
     }
 
-    public int getNormal() {
+    public Integer getNormal() {
         return normal;
     }
 
-    public void setNormal(int normal) {
+    public void setNormal(Integer normal) {
         this.normal = normal;
     }
 
-    public int getProtanStrong() {
+    public Integer getProtanStrong() {
         return protanStrong;
     }
 
-    public void setProtanStrong(int protanStrong) {
+    public void setProtanStrong(Integer protanStrong) {
         this.protanStrong = protanStrong;
     }
 
-    public int getDeutanStrong() {
+    public Integer getDeutanStrong() {
         return deutanStrong;
     }
 
-    public void setDeutanStrong(int deutanStrong) {
+    public void setDeutanStrong(Integer deutanStrong) {
         this.deutanStrong = deutanStrong;
     }
 
-    public int getTotal() {
+    public Integer getTotal() {
         return total;
     }
 
-    public void setTotal(int total) {
+    public void setTotal(Integer total) {
         this.total = total;
     }
 
