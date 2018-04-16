@@ -28,4 +28,8 @@ public class DownloadTestListFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_download_test_list, container, false);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
 }
