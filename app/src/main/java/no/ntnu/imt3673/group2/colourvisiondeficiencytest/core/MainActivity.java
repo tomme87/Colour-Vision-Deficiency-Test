@@ -50,9 +50,11 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Show the welcome screen for a test.
      *
-     * TODO parameter with test id?
+     *
      */
-    public void startWelcomeFragment() {
+    public void startWelcomeFragment(TestInfo testInfo) {
+        this.currentTestInfo = testInfo;
+        Log.d(TAG, "List size: " + this.localTestInfos.size());
         getFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new TestWelcomeFragment())
                 .addToBackStack(null)

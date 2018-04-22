@@ -111,8 +111,8 @@ public class DownloadTestListFragment extends Fragment {
     }
 
     private class RecyclerTouchListener extends RecyclerView.SimpleOnItemTouchListener {
-        private GestureDetector gestureDetector;
 
+        private GestureDetector gestureDetector;
         RecyclerTouchListener(Context context) {
             this.gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
                 @Override
@@ -126,7 +126,6 @@ public class DownloadTestListFragment extends Fragment {
         public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
 
             View child = rv.findChildViewUnder(e.getX(), e.getY());
-
             if (child != null && gestureDetector.onTouchEvent(e)) {
                 showDownloadInfoFragment(testListAdapter.getTestInfo(rv.getChildAdapterPosition(child)));
             }
