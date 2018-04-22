@@ -15,6 +15,9 @@ public interface TestInfoDAO {
     @Query("SELECT * FROM local_tests")
     List<TestInfo> getAll();
 
+    @Query("SELECT * FROM local_tests WHERE downloadId = :downloadId")
+    TestInfo getByDownloadId(long downloadId);
+
     @Insert
     void insertAll(List<TestInfo> tests);
 

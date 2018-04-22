@@ -1,6 +1,7 @@
 package no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.Nullable;
@@ -14,7 +15,7 @@ import no.ntnu.imt3673.group2.colourvisiondeficiencytest.R;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.MainActivity;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.database.AddLocalTest;
-import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.database.DeleteLocalTest;
+import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.services.DownloadTestService;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,8 +62,12 @@ public class DownloadInfoFragment extends Fragment {
     public void onBtnDownload(View view) {
         Log.d(TAG, "Downloading id: " + testInfo.getId());
 
+        Intent i = new Intent(getContext(), DownloadTestService.class);
+        i.putExtra(TestInfo.EXTRA, testInfo);
+        DownloadTestService.enqueueWork(getContext(), i);
+
         // TODO Do the actual downloading of files etc. We are just adding to db here for testing.
-        new AddLocalTest(getContext()).execute(testInfo);
+        //new AddLocalTest(getContext()).execute(testInfo);
         //new DeleteLocalTest(getContext()).execute(testInfo);
     }
 

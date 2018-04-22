@@ -1,0 +1,33 @@
+package no.ntnu.imt3673.group2.colourvisiondeficiencytest.core;
+
+import android.app.DownloadManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+
+import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.database.GetLocalTestByDownloadId;
+import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.services.ProcessDownloadService;
+
+/**
+ * Created by Tomme on 22.04.2018.
+ */
+
+public class DownloadCompleteReceiver extends BroadcastReceiver {
+    public static final String EXTRA_ID = "DlCompleteId";
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        if(!DownloadManager.ACTION_DOWNLOAD_COMPLETE.equals(intent.getAction())) {
+            return;
+        }
+
+        Bundle extras = intent.getExtras();
+
+        Long downloadId = extras.getLong(DownloadManager.EXTRA_DOWNLOAD_ID);
+
+        Intent i = new Intent(context, ProcessDownloadService.class);
+        i.putExtra(EXTRA_ID, downloadId);
+        ProcessDownloadService.enqueueWork(context, i);
+    }
+}
