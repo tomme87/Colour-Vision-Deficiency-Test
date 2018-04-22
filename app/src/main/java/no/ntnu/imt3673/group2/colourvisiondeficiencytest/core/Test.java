@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Test <T extends Plate>{
+    public static final String TEST_FOLDER = "tests";
     TestInfo info;
     List<T> plates = new ArrayList<>();
 

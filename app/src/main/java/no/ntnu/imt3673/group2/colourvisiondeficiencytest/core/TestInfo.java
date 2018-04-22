@@ -55,15 +55,17 @@ public class TestInfo implements Parcelable {
     }
 
     public TestInfo(
-            String id,
-            String name,
-            String description,
-            String resources,
-            String resultServer,
-            Integer firstPlate,
-            String type,
-           // Timestamp created,
-            Integer version
+            @NonNull String id,
+            @Nullable String name,
+            @Nullable String description,
+            @NonNull String resources,
+            @Nullable String resultServer,
+            @Nullable Integer firstPlate,
+            @NonNull String type,
+            // Timestamp created,
+            @Nullable Integer version,
+            @Nullable Long downloadId,
+            boolean processed
     ) {
         this.id = id;
         this.name = name;
@@ -74,29 +76,34 @@ public class TestInfo implements Parcelable {
         this.type = type;
        // this.created = created;
         this.version = version;
+        this.downloadId = downloadId;
+        this.processed = processed;
     }
 
+    @NonNull
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(@NonNull String id) {
         this.id = id;
     }
 
+    @Nullable
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(@Nullable String name) {
         this.name = name;
     }
 
+    @Nullable
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(@Nullable String description) {
         this.description = description;
     }
 
@@ -118,19 +125,21 @@ public class TestInfo implements Parcelable {
         this.resultsUrl = resultsUrl;
     }
 
+    @Nullable
     public Integer getFirstPlate() {
         return firstPlate;
     }
 
-    public void setFirstPlate(Integer firstPlate) {
+    public void setFirstPlate(@Nullable Integer firstPlate) {
         this.firstPlate = firstPlate;
     }
 
+    @NonNull
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(@NonNull String type) {
         this.type = type;
     }
 
@@ -145,6 +154,7 @@ public class TestInfo implements Parcelable {
     }
     */
 
+    @Nullable
     public Integer getVersion() {
         return version;
     }
@@ -185,6 +195,8 @@ public class TestInfo implements Parcelable {
         parcel.writeValue(this.firstPlate);
         parcel.writeString(this.type);
         parcel.writeValue(this.version);
+        parcel.writeValue(this.downloadId);
+        parcel.writeByte((byte) (this.processed ? 1 : 0));
     }
 
     public static final Parcelable.Creator<TestInfo> CREATOR = new Parcelable.Creator<TestInfo>() {
@@ -199,7 +211,9 @@ public class TestInfo implements Parcelable {
                     parcel.readString(),
                     (Integer) parcel.readValue(Integer.class.getClassLoader()),
                     parcel.readString(),
-                    (Integer) parcel.readValue(Integer.class.getClassLoader())
+                    (Integer) parcel.readValue(Integer.class.getClassLoader()),
+                    (Long) parcel.readValue(Long.class.getClassLoader()),
+                    parcel.readByte() != 0
             );
         }
 
