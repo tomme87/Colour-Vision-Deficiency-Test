@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -48,6 +49,13 @@ public class TestListAdapter extends RecyclerView.Adapter<TestListAdapter.TestLi
     public void onBindViewHolder(TestListViewHolder holder, int position) {
         TestInfo testInfo = testInfos.get(position);
         holder.name.setText(testInfo.getName());
+        holder.type.setText(testInfo.getType());
+
+        switch (testInfo.getType()){
+            case "Ishihara":
+                holder.icon.setImageResource(R.drawable.ishihara_type_icon);
+        }
+
     }
 
     @Override
@@ -58,10 +66,16 @@ public class TestListAdapter extends RecyclerView.Adapter<TestListAdapter.TestLi
     static class TestListViewHolder extends RecyclerView.ViewHolder {
 
         TextView name;
+        TextView type;
+        ImageView icon;
+
 
         public TestListViewHolder(View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.tv_test_item_name);
+            type = itemView.findViewById(R.id.tv_test_item_type);
+            icon = itemView.findViewById(R.id.iv_test_icon);
+
         }
     }
 }

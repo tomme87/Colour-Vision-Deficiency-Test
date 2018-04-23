@@ -42,4 +42,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.2'
 
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    //CardView
+    implementation 'com.android.support:cardview-v7:26.1.0'
 }

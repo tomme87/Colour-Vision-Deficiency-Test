@@ -71,7 +71,7 @@ public class ProcessDownloadService extends JobIntentService implements GetLocal
 
     private void processDownload(TestInfo testInfo, File zip) {
         try {
-            unzip(zip, new File(getFilesDir(), Test.TEST_FOLDER + File.separator + testInfo.getId()));
+            unzip(zip, new File(getApplicationContext().getFilesDir(), Test.TEST_FOLDER + File.separator + testInfo.getId()));
             Log.d(TAG, "Unzipped");
             // TODO mark as processed and broadcast it?
             new MarkLocalTestAsProcessed(getApplicationContext(), this).execute(testInfo);
@@ -99,6 +99,7 @@ public class ProcessDownloadService extends JobIntentService implements GetLocal
      * @throws IOException
      */
     public static void unzip(File zipFile, File targetDirectory) throws IOException {
+        Log.d(TAG, "Output dir: " + targetDirectory.getAbsolutePath());
         ZipInputStream zis = new ZipInputStream(
                 new BufferedInputStream(new FileInputStream(zipFile)));
         try {
