@@ -100,6 +100,7 @@ public class LocalTestListFragment extends Fragment {
 
 
     public void updateLocalList() {
+        //Get Local Tests from DB
         new GetAllLocalTests(getContext()) {
             @Override
             protected void onPostExecute(List<TestInfo> testInfos) {
@@ -114,17 +115,6 @@ public class LocalTestListFragment extends Fragment {
         Log.d(TAG, "Destroyed");
         getActivity().unregisterReceiver(this.downloadProcessedReceiver);
     }
-
-    /*
-
-     @Override
-     protected List<EntryEntity> doInBackground(EntriesListViewAdapter... entriesListViewAdapters) {
-        this.adapter = entriesListViewAdapters[0];
-        AppDatabase.getAppDatabase(this.appContext).entryEntityDAO().delete();
-        List<EntryEntity> localTestList = AppDatabase.getAppDatabase(this.appContext).entryEntityDAO().GetAllLocalTests();
-        return localTestList;
-    }
-     */
 
     private void showTestWelcomeFragment(TestInfo testInfo) {
         mainActivity.startWelcomeFragment(testInfo);

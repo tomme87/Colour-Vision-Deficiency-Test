@@ -12,4 +12,6 @@
 
     <string name="error_already_downloading">Already downloading this test</string>
     <string name="btn_run_text">Run Test</string>
+
+    <string name="btn_start_test">Start Test</string>
 </resources>

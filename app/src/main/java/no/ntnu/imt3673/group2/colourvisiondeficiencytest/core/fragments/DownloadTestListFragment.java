@@ -22,8 +22,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.R;
@@ -31,6 +33,7 @@ import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.GsonRequest;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.MainActivity;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.adapters.TestListAdapter;
+import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.database.GetAllLocalTests;
 
 
 /**
@@ -60,11 +63,13 @@ public class DownloadTestListFragment extends Fragment {
 
         this.queue = Volley.newRequestQueue(getContext());
 
+
+        //Get Available Tests.
         request = new GsonRequest<>(getString(R.string.url_test_list), TestInfo[].class, null, new Response.Listener<TestInfo[]>() {
             @Override
             public void onResponse(TestInfo[] response) {
                 Log.d(TAG, "Got response! " + response.length);
-                testListAdapter.setTestInfos(response);
+                testListAdapter.setTestInfos(updateAvailableTestList(response));
             }
         }, new Response.ErrorListener() {
             @Override
@@ -72,6 +77,7 @@ public class DownloadTestListFragment extends Fragment {
                 Log.d(TAG, "Error downloading list: " + error.getMessage());
             }
         });
+
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_download_test_list, container, false);
@@ -98,9 +104,10 @@ public class DownloadTestListFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-
         getNewList();
     }
+
+    
 
     private void getNewList() {
         this.queue.add(this.request);
@@ -108,6 +115,38 @@ public class DownloadTestListFragment extends Fragment {
 
     private void showDownloadInfoFragment(TestInfo testInfo) {
         mainActivity.startDownloadInfoFragment(testInfo);
+    }
+
+    public TestInfo[] updateAvailableTestList(TestInfo[] response){
+        //Get Local Tests from DB
+        List <TestInfo> localTestsList=mainActivity.getLocalTestInfos();
+
+        TestInfo[] notDownloadedTests = new TestInfo[response.length-localTestsList.size()];
+
+        Log.d("UpdateTestList","Response size: "+ response.length+ " LocalListTest Size: " +localTestsList.size() + " NotDownloaded Size: " + notDownloadedTests.length );
+        boolean downloaded = false;
+        int count=0;
+
+        for (int i=0; i < response.length; i++) {
+
+            for( int j=0; j < localTestsList.size() ; j++){
+
+                if(response[i].getId().equals(localTestsList.get(j).getId())){
+                    Log.d("UpdateTestList", "Equal Test Response: " +i+ "Equal Test Local:" +j);
+                    downloaded=true;
+                }
+            }
+
+            if(downloaded==false) {
+                Log.d("UpdateTestList", "Count: "+count );
+                notDownloadedTests[count]=response[i];
+                count++;
+            }
+            downloaded = false;
+
+        }
+
+        return notDownloadedTests;
     }
 
     private class RecyclerTouchListener extends RecyclerView.SimpleOnItemTouchListener {
@@ -132,5 +171,6 @@ public class DownloadTestListFragment extends Fragment {
 
             return false;
         }
+
     }
 }

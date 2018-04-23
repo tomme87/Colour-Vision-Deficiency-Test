@@ -43,7 +43,7 @@ public class TestWelcomeFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        this.button = getView().findViewById(R.id.btn_run);
+        this.button = getView().findViewById(R.id.btn_start_test);
         this.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
