@@ -1,6 +1,9 @@
 package no.ntnu.imt3673.group2.colourvisiondeficiencytest.core;
 
 import android.app.DownloadManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
     TestInfo currentTestInfo; // TODO I don't think the use of this variable is good. look at Parcelable instead...?
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         this.downloadCompleteReceiver = new DownloadCompleteReceiver();
         IntentFilter intentFilter = new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
         registerReceiver(downloadCompleteReceiver, intentFilter);
+
+
 
         this.startLocalListFragment();
     }

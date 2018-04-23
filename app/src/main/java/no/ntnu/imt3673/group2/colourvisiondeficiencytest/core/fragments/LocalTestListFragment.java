@@ -1,7 +1,10 @@
 package no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.fragments;
 
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.Nullable;
@@ -41,7 +44,7 @@ public class LocalTestListFragment extends Fragment {
 
     private GsonRequest<TestInfo[]> request;
 
-
+    private DownloadProcessedReceiver downloadProcessedReceiver;
 
     public LocalTestListFragment() {
         // Required empty public constructor
@@ -87,7 +90,16 @@ public class LocalTestListFragment extends Fragment {
         this.recyclerView.addOnItemTouchListener( new RecyclerTouchListener(getContext()));
         Log.d(TAG, "View created");
 
+        this.downloadProcessedReceiver = new DownloadProcessedReceiver();
+        getActivity().registerReceiver(this.downloadProcessedReceiver, new IntentFilter(DownloadProcessedReceiver.ACTION_RESP));
+
         //
+        this.updateLocalList();
+    }
+
+
+
+    public void updateLocalList() {
         new GetAllLocalTests(getContext()) {
             @Override
             protected void onPostExecute(List<TestInfo> testInfos) {
@@ -96,6 +108,12 @@ public class LocalTestListFragment extends Fragment {
         }.execute();
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.d(TAG, "Destroyed");
+        getActivity().unregisterReceiver(this.downloadProcessedReceiver);
+    }
 
     /*
 
@@ -138,7 +156,15 @@ public class LocalTestListFragment extends Fragment {
     }
 
 
+    public class DownloadProcessedReceiver extends BroadcastReceiver {
+        public static final String ACTION_RESP = "DlProcessedReciver";
 
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.d(TAG, "Processed done received");
+            updateLocalList();
+        }
+    }
 
 
 }

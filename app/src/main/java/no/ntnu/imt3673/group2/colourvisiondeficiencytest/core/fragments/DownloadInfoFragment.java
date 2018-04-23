@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.R;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.MainActivity;
@@ -61,6 +62,14 @@ public class DownloadInfoFragment extends Fragment {
 
     public void onBtnDownload(View view) {
         Log.d(TAG, "Downloading id: " + testInfo.getId());
+
+        for(TestInfo testInfoCheck : mainActivity.getLocalTestInfos()) {
+            if(testInfoCheck.getId().equals(testInfo.getId())) {
+                Toast.makeText(getContext(), R.string.error_already_downloading, Toast.LENGTH_LONG).show();
+                return;
+            }
+        }
+        mainActivity.getLocalTestInfos().add(testInfo);
 
         Intent i = new Intent(getContext(), DownloadTestService.class);
         i.putExtra(TestInfo.EXTRA, testInfo);

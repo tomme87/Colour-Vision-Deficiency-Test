@@ -20,15 +20,18 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.DownloadCompleteReceiver;
+import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.MainActivity;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.Test;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.database.GetLocalTestByDownloadId;
+import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.database.MarkLocalTestAsProcessed;
+import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.fragments.LocalTestListFragment;
 
 /**
  * Created by Tomme on 22.04.2018.
  */
 
-public class ProcessDownloadService extends JobIntentService implements GetLocalTestByDownloadId.PostExecuteListener {
+public class ProcessDownloadService extends JobIntentService implements GetLocalTestByDownloadId.PostExecuteListener, MarkLocalTestAsProcessed.PostExecuteListener {
     static final int JOB_ID = 1001;
     private static final String TAG = "ProcessDlService";
 
@@ -69,10 +72,21 @@ public class ProcessDownloadService extends JobIntentService implements GetLocal
     private void processDownload(TestInfo testInfo, File zip) {
         try {
             unzip(zip, new File(getFilesDir(), Test.TEST_FOLDER + File.separator + testInfo.getId()));
+            Log.d(TAG, "Unzipped");
             // TODO mark as processed and broadcast it?
+            new MarkLocalTestAsProcessed(getApplicationContext(), this).execute(testInfo);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onProcessedMarked(TestInfo testInfo) {
+        Log.d(TAG, "db updated, Sending bradcast");
+        Intent intent = new Intent(LocalTestListFragment.DownloadProcessedReceiver.ACTION_RESP);
+        //intent.putExtra(TestInfo.EXTRA, testInfo);
+        //intent.addCategory(Intent.CATEGORY_DEFAULT);
+        sendBroadcast(intent);
     }
 
     /**

@@ -12,11 +12,17 @@ import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
 @Dao
 public interface TestInfoDAO {
 
-    @Query("SELECT * FROM local_tests")
+    @Query("SELECT * FROM local_tests WHERE processed = 1")
     List<TestInfo> getAll();
 
     @Query("SELECT * FROM local_tests WHERE downloadId = :downloadId")
     TestInfo getByDownloadId(long downloadId);
+
+    @Query("SELECT * FROM local_tests WHERE id = :id")
+    TestInfo getById(String id);
+
+    @Query("UPDATE local_tests SET processed = 1 WHERE id = :id")
+    void setProcessedById(String id);
 
     @Insert
     void insertAll(List<TestInfo> tests);

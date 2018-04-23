@@ -1,6 +1,7 @@
 package no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.database;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteConstraintException;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -30,7 +31,12 @@ public class AddLocalTest extends AsyncTask<TestInfo,Void,List<TestInfo>> {
     protected List<TestInfo> doInBackground(TestInfo... testInfos) {
         TestInfoDAO testInfoDAO = AppDatabase.getAppDatabase(this.appContext).testInfoDAO();
         for (TestInfo testInfo: testInfos) {
-            testInfoDAO.insert(testInfo);
+            try {
+                testInfoDAO.insert(testInfo);
+            } catch (SQLiteConstraintException e) {
+                Log.d(TAG, "Already in database");
+            }
+
         }
         return testInfoDAO.getAll();
     }
