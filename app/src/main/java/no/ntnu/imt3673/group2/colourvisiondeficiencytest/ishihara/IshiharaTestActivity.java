@@ -16,6 +16,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.R;
+import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.ResultSet;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.Test;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara.fragments.IshiharaTestFragment;
@@ -23,10 +24,13 @@ import no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara.fragments.Ishi
 public class IshiharaTestActivity extends AppCompatActivity {
     private static final String TAG = "IshiharaTestActivity";
 
+    private Test<IshiharaPlate> test;
+    private TestInfo testInfo;
+    private List<IshiharaPlate> plates;
+    private ResultSet results;
+
     //  TODO: Create Test object that contains TestInfo and List<Plates>
     //  TODO: Create/get ResultSet object
-
-    TestInfo testInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,15 +42,20 @@ public class IshiharaTestActivity extends AppCompatActivity {
         new CreateTestObject().execute(file);
 
         setContentView(R.layout.activity_ishihara_test);
+
+        Log.v(TAG, "Hello from ishihara test activity");
+        runIshiharaTestFragment();
     }
 
-    /*
-    public void startIshiharaTestFragment() {
+
+    public void runIshiharaTestFragment() {
+        IshiharaTestFragment fragment = new IshiharaTestFragment();
         getFragmentManager().beginTransaction()
-                .replace(android.R.id.content, new IshiharaTestFragment.newInstance())
+                .replace(android.R.id.content, fragment)
                 .addToBackStack(null)
                 .commit();
     }
+    /*
 
     public void startIshiharaResultFragment() {
         getFragmentManager().beginTransaction()
