@@ -87,7 +87,7 @@ public class LocalTestListFragment extends Fragment {
         this.recyclerView.addOnItemTouchListener( new RecyclerTouchListener(getContext()));
         Log.d(TAG, "View created");
 
-        //
+        //Get Local Tests from DB
         new GetAllLocalTests(getContext()) {
             @Override
             protected void onPostExecute(List<TestInfo> testInfos) {
@@ -96,17 +96,6 @@ public class LocalTestListFragment extends Fragment {
         }.execute();
     }
 
-
-    /*
-
-     @Override
-     protected List<EntryEntity> doInBackground(EntriesListViewAdapter... entriesListViewAdapters) {
-        this.adapter = entriesListViewAdapters[0];
-        AppDatabase.getAppDatabase(this.appContext).entryEntityDAO().delete();
-        List<EntryEntity> localTestList = AppDatabase.getAppDatabase(this.appContext).entryEntityDAO().GetAllLocalTests();
-        return localTestList;
-    }
-     */
 
     private void showTestWelcomeFragment(TestInfo testInfo) {
         mainActivity.startWelcomeFragment(testInfo);

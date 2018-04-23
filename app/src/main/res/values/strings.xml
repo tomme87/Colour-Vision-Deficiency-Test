@@ -9,4 +9,5 @@
 
     <string name="url_test_list">http://folk.ntnu.no/tomaszmr/md/TestList.json</string>
     <string name="btn_download_text">Download</string>
+    <string name="btn_start_test">Start Test</string>
 </resources>
