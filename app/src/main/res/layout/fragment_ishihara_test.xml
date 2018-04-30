@@ -15,6 +15,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:adjustViewBounds="true"
         android:contentDescription="@string/ishihara_test_plate_image_description"
         app:layout_constraintBottom_toTopOf="@+id/et_ishihare_test_input"
         app:layout_constraintEnd_toEndOf="parent"

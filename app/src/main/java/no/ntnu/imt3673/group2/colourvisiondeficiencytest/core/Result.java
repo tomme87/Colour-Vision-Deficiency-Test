@@ -1,20 +1,20 @@
 package no.ntnu.imt3673.group2.colourvisiondeficiencytest.core;
 
-public abstract class Result {
-    private int plateId;
+public abstract class Result <T extends Plate> {
+    private T plate;
 
     public Result() {
     }
 
-    public Result(int plateId) {
-        this.plateId = plateId;
+    public Result(T plate) {
+        this.plate = plate;
     }
 
-    public int getPlateId() {
-        return plateId;
+    public T getPlate() {
+        return plate;
     }
 
-    public void setPlateId(int plateId) {
-        this.plateId = plateId;
+    public void setPlate(T plate) {
+        this.plate = plate;
     }
 }

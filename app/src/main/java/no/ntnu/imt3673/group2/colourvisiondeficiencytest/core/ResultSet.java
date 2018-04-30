@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ResultSet {
-    private List<Result> results = new ArrayList<>();
+public class ResultSet <T extends Result>{
+    private List<T> results = new ArrayList<>();
     private String testId;
     private Date time;
     private Map<String, Object> extraData = new HashMap<>();
@@ -15,18 +15,18 @@ public class ResultSet {
     public ResultSet() {
     }
 
-    public ResultSet(List<Result> results, String testId, Date time, Map<String, Object> extraData) {
+    public ResultSet(List<T> results, String testId, Date time, Map<String, Object> extraData) {
         this.results = results;
         this.testId = testId;
         this.time = time;
         this.extraData = extraData;
     }
 
-    public List<Result> getResults() {
+    public List<T> getResults() {
         return results;
     }
 
-    public void setResults(List<Result> results) {
+    public void setResults(List<T> results) {
         this.results = results;
     }
 
@@ -58,7 +58,7 @@ public class ResultSet {
      * adds result to set
      * @param result
      */
-    public void addResult (Result result) {
+    public void addResult (T result) {
         this.results.add(result);
     }
 
