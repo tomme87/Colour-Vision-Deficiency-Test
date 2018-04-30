@@ -25,7 +25,8 @@
             android:name=".ishihara.IshiharaTestActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
-            android:theme="@style/AppGreyscale"></activity>
+            android:theme="@style/AppGreyscale"
+            android:windowSoftInputMode="adjustResize"></activity>
 
         <service
             android:name=".core.services.DownloadTestService"

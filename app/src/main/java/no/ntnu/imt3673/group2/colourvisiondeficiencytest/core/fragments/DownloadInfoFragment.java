@@ -44,6 +44,7 @@ public class DownloadInfoFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         this.mainActivity = (MainActivity) getActivity();
+        this.mainActivity.setActionBarTitle(getString(R.string.app_name_info_fragment));
         this.testInfo = this.mainActivity.getCurrentTestInfo();
 
         Log.d(TAG, "Test for test: " + testInfo.getName());
@@ -89,10 +90,6 @@ public class DownloadInfoFragment extends Fragment {
         Intent i = new Intent(getContext(), DownloadTestService.class);
         i.putExtra(TestInfo.EXTRA, testInfo);
         DownloadTestService.enqueueWork(getContext(), i);
-
-        // TODO Do the actual downloading of files etc. We are just adding to db here for testing.
-        //new AddLocalTest(getContext()).execute(testInfo);
-        //new DeleteLocalTest(getContext()).execute(testInfo);
     }
 
 }

@@ -38,8 +38,7 @@ public class MainActivity extends AppCompatActivity {
         IntentFilter intentFilter = new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
         registerReceiver(downloadCompleteReceiver, intentFilter);
 
-
-
+        //getSupportActionBar().setTitle("Hola");
         this.startLocalListFragment();
     }
 
@@ -104,5 +103,14 @@ public class MainActivity extends AppCompatActivity {
 
     public TestInfo getCurrentTestInfo() {
         return currentTestInfo;
+    }
+
+    /**
+     * Changes Action Bar title
+     * https://stackoverflow.com/questions/28389841/change-actionbar-title-using-fragments
+     * @param title
+     */
+    public void setActionBarTitle(String title) {
+        getSupportActionBar().setTitle(title);
     }
 }
