@@ -15,6 +15,7 @@ import no.ntnu.imt3673.group2.colourvisiondeficiencytest.R;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara.IshiharaPlate;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara.IshiharaTestActivity;
+import no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara.IshiharaThreshold;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -74,20 +75,25 @@ public class IshiharaTestResultsFragment extends Fragment {
     }
 
     private int formatResults() {
-        switch (this.activity.getMaxIndex()) {
-            case IshiharaTestActivity.NORMAL:
-                return R.string.results_ishihara_normal;
-            case IshiharaTestActivity.DEUTAN:
-                if (this.activity.getCounters()[IshiharaTestActivity.DEUTAN] >
-                        this.activity.getCounters()[IshiharaTestActivity.PROTAN]) {
-                    return R.string.results_ishihara_deutan;
-                }
-                return R.string.results_ishihara_general_red_green;
-            case IshiharaTestActivity.PROTAN:
-                return R.string.results_ishihara_protan;
-            case IshiharaTestActivity.TOTAL:
-                return R.string.results_ishihara_total;
+        int resultsNormal = this.activity.getCounters()[IshiharaTestActivity.NORMAL];
+        IshiharaThreshold ishiharaThreshold = this.activity.getIshiharaThreshold();
+
+        if (resultsNormal > ishiharaThreshold.getNormal()) {
+            return R.string.results_ishihara_normal;
         }
+        if (resultsNormal < ishiharaThreshold.getDeficiency()) {
+            if (this.activity.getCounters()[IshiharaTestActivity.DEUTAN] >
+                    this.activity.getCounters()[IshiharaTestActivity.PROTAN]) {
+                return R.string.results_ishihara_deutan;
+            }
+            if (this.activity.getCounters()[IshiharaTestActivity.DEUTAN] <
+                    this.activity.getCounters()[IshiharaTestActivity.PROTAN]) {
+                return R.string.results_ishihara_protan;
+            }
+            return R.string.results_ishihara_general_red_green;
+        }
+
         return R.string.results_ishihara_uncertain;
+
     }
 }

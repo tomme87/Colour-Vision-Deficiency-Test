@@ -62,7 +62,6 @@ public class TestInfo implements Parcelable {
             @Nullable String resultServer,
             @Nullable Integer firstPlate,
             @NonNull String type,
-            // Timestamp created,
             @Nullable Integer version,
             @Nullable Long downloadId,
             boolean processed
@@ -74,7 +73,6 @@ public class TestInfo implements Parcelable {
         this.resultsUrl = resultServer;
         this.firstPlate = firstPlate;
         this.type = type;
-       // this.created = created;
         this.version = version;
         this.downloadId = downloadId;
         this.processed = processed;
@@ -142,17 +140,6 @@ public class TestInfo implements Parcelable {
     public void setType(@NonNull String type) {
         this.type = type;
     }
-
-    /*
-    @Nullable
-    public Timestamp getCreated() {
-        return created;
-    }
-
-    public void setCreated(@Nullable Timestamp created) {
-        this.created = created;
-    }
-    */
 
     @Nullable
     public Integer getVersion() {

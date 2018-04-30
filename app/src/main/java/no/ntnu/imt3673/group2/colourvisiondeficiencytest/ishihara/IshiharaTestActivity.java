@@ -1,6 +1,5 @@
 package no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,8 +17,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
-import no.ntnu.imt3673.group2.colourvisiondeficiencytest.R;
-import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.Result;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.ResultSet;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.Test;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
@@ -32,7 +29,6 @@ public class IshiharaTestActivity extends AppCompatActivity {
     public static final int DEUTAN = 1;
     public static final int PROTAN = 2;
     public static final int TOTAL = 3;
-    private int maxIndex;
     private int[] counters = {0,0,0,0};
 
     private Test<IshiharaPlate> test;
@@ -40,10 +36,9 @@ public class IshiharaTestActivity extends AppCompatActivity {
     private List<IshiharaPlate> plates;
     private ResultSet<IshiharaResult> results;
 
-    IshiharaPlate currentPlate;
+    IshiharaThreshold ishiharaThreshold;
 
-    //  TODO: Create Test object that contains TestInfo and List<Plates>
-    //  TODO: Create/get ResultSet object
+    IshiharaPlate currentPlate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,13 +48,6 @@ public class IshiharaTestActivity extends AppCompatActivity {
 
         File file = new File(getFilesDir(), Test.TEST_FOLDER + File.separator + testInfo.getId() + File.separator + "plates.json");
         new CreateTestObject().execute(file);
-
-        /*
-        setContentView(R.layout.activity_ishihara_test);
-
-        Log.v(TAG, "Hello from ishihara test activity");
-        runIshiharaTestFragment();
-        */
     }
 
 
@@ -99,7 +87,6 @@ public class IshiharaTestActivity extends AppCompatActivity {
     public void runRandomPlate() {
         int size = test.getPlates().size();
         if(size == 0) {
-            // TODO end test, show results
             Log.d(TAG, "No more plates");
             summerizeResults();
             return;
@@ -125,13 +112,6 @@ public class IshiharaTestActivity extends AppCompatActivity {
             }
         }
 
-        this.maxIndex = NORMAL;
-        for (int i = 1; i < counters.length; i++) {
-            if (counters[i] > counters[maxIndex]) {
-                this.maxIndex = i;
-            }
-        }
-        Log.d(TAG, "No. of answer for maxIndex: " + this.counters[maxIndex]);
         runIshiharaTestSummary();
     }
 
@@ -149,7 +129,7 @@ public class IshiharaTestActivity extends AppCompatActivity {
             this.counters[NORMAL]++;
             matched = true;
         }
-        if (answer == plate.getDeutanStrong() ) { // plate
+        if (answer == plate.getDeutanStrong() ) { 
             this.counters[DEUTAN]++;
             matched = true;
         }
@@ -195,23 +175,13 @@ public class IshiharaTestActivity extends AppCompatActivity {
         return results;
     }
 
-    public int getMaxIndex() {
-        return maxIndex;
-    }
-
     public int[] getCounters() {
         return counters;
     }
 
-    /*
-
-    public void startIshiharaResultFragment() {
-        getFragmentManager().beginTransaction()
-                .replace(android.R.id.content, new LocalTestListFragment())
-                .addToBackStack(null)
-                .commit();
+    public IshiharaThreshold getIshiharaThreshold() {
+        return ishiharaThreshold;
     }
-    */
 
     class CreateTestObject extends AsyncTask<File, Void, Test> {
 
@@ -233,10 +203,33 @@ public class IshiharaTestActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Test mTest) {
-            //IshiharaPlate ishiharaPlate = (IshiharaPlate) mTest.getPlates().get(0);
             test = mTest;
+            File file = new File(getFilesDir(), Test.TEST_FOLDER + File.separator + testInfo.getId() + File.separator + "thresholds.json");
+            new CreateThresholdObject().execute(file);
+        }
+    }
+
+    class CreateThresholdObject extends AsyncTask<File, Void, IshiharaThreshold> {
+
+        @Override
+        protected IshiharaThreshold doInBackground(File... files) {
+            Gson gson = new Gson();
+            try {
+                JsonReader jsonReader = new JsonReader(new FileReader(files[0]));
+                IshiharaThreshold ishiharaThreshold = gson.fromJson(jsonReader, IshiharaThreshold.class);
+                return ishiharaThreshold;
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                Log.d(TAG, "Threshold file not found", e);
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(IshiharaThreshold threshold) {
+            ishiharaThreshold = threshold;
             runFirstPlate();
-            //Log.d(TAG, "Test object created : " + test.getInfo().getName() + " : " + ishiharaPlate.getFilename());
         }
     }
 }
