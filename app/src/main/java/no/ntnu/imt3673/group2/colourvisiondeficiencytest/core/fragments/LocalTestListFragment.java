@@ -19,12 +19,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
-
 import java.util.List;
 
-import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.GsonRequest;
+import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.GsonGetRequest;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.MainActivity;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.R;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
@@ -42,7 +39,7 @@ public class LocalTestListFragment extends Fragment {
     private TestListAdapter testListAdapter;
     MainActivity mainActivity;
 
-    private GsonRequest<TestInfo[]> request;
+    private GsonGetRequest<TestInfo[]> request;
 
     private DownloadProcessedReceiver downloadProcessedReceiver;
 
@@ -56,7 +53,8 @@ public class LocalTestListFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         mainActivity = (MainActivity) getActivity();
-        // Inflate the layout for this fragment
+        mainActivity.setActionBarTitle(getString(R.string.app_name_local_fragment));
+       // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_local_test_list, container, false);
     }
 

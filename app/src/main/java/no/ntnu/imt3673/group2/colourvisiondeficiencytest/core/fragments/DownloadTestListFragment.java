@@ -15,25 +15,18 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.R;
-import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.GsonRequest;
+import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.GsonGetRequest;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.MainActivity;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.adapters.TestListAdapter;
-import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.database.GetAllLocalTests;
 
 
 /**
@@ -45,7 +38,7 @@ public class DownloadTestListFragment extends Fragment {
     private RecyclerView recyclerView;
     private TestListAdapter testListAdapter;
 
-    private GsonRequest<TestInfo[]> request;
+    private GsonGetRequest<TestInfo[]> request;
     private RequestQueue queue;
 
     private MainActivity mainActivity;
@@ -60,12 +53,13 @@ public class DownloadTestListFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         this.mainActivity = (MainActivity) getActivity();
+        this.mainActivity.setActionBarTitle(getString(R.string.app_name_available_fragment));
 
         this.queue = Volley.newRequestQueue(getContext());
 
 
         //Get Available Tests.
-        request = new GsonRequest<>(getString(R.string.url_test_list), TestInfo[].class, null, new Response.Listener<TestInfo[]>() {
+        request = new GsonGetRequest<>(getString(R.string.url_test_list), TestInfo[].class, null, new Response.Listener<TestInfo[]>() {
             @Override
             public void onResponse(TestInfo[] response) {
                 Log.d(TAG, "Got response! " + response.length);

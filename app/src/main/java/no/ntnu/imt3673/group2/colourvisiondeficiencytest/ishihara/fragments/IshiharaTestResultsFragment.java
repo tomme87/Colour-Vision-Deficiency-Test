@@ -10,8 +10,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonRequest;
+import com.google.gson.Gson;
 
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.R;
+import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.GsonPostRequest;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara.IshiharaPlate;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara.IshiharaTestActivity;
@@ -42,6 +50,8 @@ public class IshiharaTestResultsFragment extends Fragment {
         this.activity = (IshiharaTestActivity) getActivity();
         this.testInfo = this.activity.getTestInfo();
 
+
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_ishihara_test_results, container, false);
     }
@@ -56,6 +66,7 @@ public class IshiharaTestResultsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "sending results");
+                sendResults();
                 Log.d(TAG, "exiting");
                 getActivity().finish();
             }
@@ -72,6 +83,26 @@ public class IshiharaTestResultsFragment extends Fragment {
         this.tvResults.setText(formatResults());
 
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    private void sendResults() {
+        Gson gson = new Gson();
+
+
+        new GsonPostRequest<String>(this.testInfo.getResourceUrl(), gson.toJson(this.activity.getResults()),
+                String.class, null, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Response sent, got" + response);
+                Toast.makeText(getContext(), R.string.response_testresult_sent, Toast.LENGTH_LONG).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "Unable to send response : " + error.getMessage());
+                Toast.makeText(getContext(), R.string.response_testresult_sent_error, Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private int formatResults() {

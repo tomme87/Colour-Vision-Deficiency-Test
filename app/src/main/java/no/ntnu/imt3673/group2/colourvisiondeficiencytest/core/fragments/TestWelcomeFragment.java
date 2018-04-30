@@ -44,6 +44,9 @@ public class TestWelcomeFragment extends Fragment {
 
         this.testActivityClassFactory = new TestActivityClassFactory();
         this.mainActivity = (MainActivity) getActivity();
+
+        this.mainActivity.setActionBarTitle(getString(R.string.app_name_info_fragment));
+
         this.testInfo = mainActivity.getCurrentTestInfo();
 
         try {

@@ -1,5 +1,12 @@
 <resources>
     <string name="app_name">Colour Vision Deficiency Test</string>
+    <string name="app_name_local_fragment">Downloaded Tests</string>
+    <string name="app_name_available_fragment">Available Tests</string>
+    <string name="app_name_info_fragment">Test info</string>
+    <string name="app_name_welcome_fragment">Start a new test</string>
+
+
+
     <string name="ishihara_test_plate_image_description">The image of the current test plate.</string>
     <string name="ishihara_test_plate_input">What you see.</string>
     <string name="ishihara_test_next_btn">Next</string>
@@ -24,6 +31,12 @@
 
     <string name="tv_download_test_type">Test Type</string>
     <string name="tv_download_test_desc">Test Description</string>
+
+    <string name="response_testresult_sent">Test data sent</string>
+    <string name="response_testresult_sent_error">Unable to send test data!</string>
+
+    <string name="btn_send_and_exit">Send result to researcher</string>
+    <string name="btn_exit">Exit</string>
 
     <string name="tv_test_welcome_info_type">Test Type</string>
     <string name="tv_test_welcome_info_desc">Test Description</string>

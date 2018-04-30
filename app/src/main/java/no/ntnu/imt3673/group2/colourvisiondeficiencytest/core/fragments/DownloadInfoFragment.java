@@ -44,6 +44,7 @@ public class DownloadInfoFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         this.mainActivity = (MainActivity) getActivity();
+        this.mainActivity.setActionBarTitle(getString(R.string.app_name_info_fragment));
         this.testInfo = this.mainActivity.getCurrentTestInfo();
 
         Log.d(TAG, "Test for test: " + testInfo.getName());
