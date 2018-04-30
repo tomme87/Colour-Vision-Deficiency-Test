@@ -16,6 +16,8 @@ import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.ResultSet;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.Test;
@@ -68,6 +70,7 @@ public class IshiharaTestActivity extends AppCompatActivity {
         Integer firstPlate = testInfo.getFirstPlate();
         if(firstPlate != null) {
             for (int i = 0; i < this.test.getPlates().size(); i++) {
+
                 if (this.test.getPlates().get(i).getId() == firstPlate) {
                     runIshiharaTestFragment(i);
                     return;

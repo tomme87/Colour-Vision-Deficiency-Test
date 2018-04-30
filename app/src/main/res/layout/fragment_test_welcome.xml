@@ -7,18 +7,18 @@
     android:layout_height="match_parent"
     tools:context="no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.fragments.TestWelcomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <Button
         android:id="@+id/btn_start_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
         android:text="@string/btn_start_test"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sb_test_welcome_seekBar" />
 
 
     <TextView
@@ -99,5 +99,52 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_test_welcome_info_general_title" />
+
+    <TextView
+        android:id="@+id/tv_test_welcome_info_brightness_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/tv_test_welcome_info_brightness_title"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_test_welcome_info_general_content" />
+
+    <ImageView
+        android:id="@+id/iv_test_welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/iv_test_welcome_info_brightness_desc"
+        android:src="@drawable/ic_brightness_greyscale"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_test_welcome_info_brightness_content" />
+
+    <TextView
+        android:id="@+id/tv_test_welcome_info_brightness_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/tv_test_welcome_info_brightness_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_test_welcome_info_brightness_title" />
+
+    <SeekBar
+        android:id="@+id/sb_test_welcome_seekBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_test_welcome" />
 
 </android.support.constraint.ConstraintLayout>

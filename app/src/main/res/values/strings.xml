@@ -29,19 +29,29 @@
     <string name="results_ishihara_total">Strong colour deficiency</string>
     <string name="results_ishihara_uncertain">Uncertain test results</string>
 
-    <string name="tv_download_test_type">Test Type: </string>
-    <string name="tv_download_test_desc">Test Description: </string>
+    <string name="tv_download_test_type">Test Type</string>
+    <string name="tv_download_test_desc">Test Description</string>
 
     <string name="response_testresult_sent">Test data sent</string>
     <string name="response_testresult_sent_error">Unable to send test data!</string>
 
     <string name="btn_send_and_exit">Send result to researcher</string>
     <string name="btn_exit">Exit</string>
-    <string name="tv_test_welcome_info_general_title">General test information: </string>
+
+    <string name="tv_test_welcome_info_type">Test Type</string>
+    <string name="tv_test_welcome_info_desc">Test Description</string>
+
+    <string name="tv_test_welcome_info_general_title">General test information</string>
     <string name="tv_test_welcome_info_general_content">
         Please sit in a well lit area while taking the test.
         The test has to be completed in one sitting, for the best possible accuracy.
     </string>
+    <string name="tv_test_welcome_info_brightness_title">Brightness Calibration</string>
+    <string name="tv_test_welcome_info_brightness_content">
+        Please adjust the brightness of your device so that you see all 11 areas/slices of the circle.
+        This will change your devices' brightness, but is important for taking the test.
+    </string>
+    <string name="iv_test_welcome_info_brightness_desc">Image file that shows 11 grey patches, for brightness calibration.</string>
 
     <string name="btn_open_test">Open test</string>
 

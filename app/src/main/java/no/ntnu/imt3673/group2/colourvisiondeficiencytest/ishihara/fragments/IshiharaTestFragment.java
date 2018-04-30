@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.R;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.Test;
@@ -32,6 +34,8 @@ public class IshiharaTestFragment extends Fragment {
     ImageView imageView;
     Button button;
     EditText editText;
+
+    Timer t = new Timer();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,13 +58,23 @@ public class IshiharaTestFragment extends Fragment {
 
         this.editText = view.findViewById(R.id.et_ishihare_test_input);
 
+
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                activity.storeResultAndNext(editText.getText().toString());
+            }
+        }, 5000);
+
         this.button = view.findViewById(R.id.btn_ishihara_test_button);
         this.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                t.cancel();
                 activity.storeResultAndNext(editText.getText().toString());
             }
         });
+
 
 
         Log.d(TAG, "Test fragment created : " + imageFile.getAbsolutePath() +  " : " + imageFile.exists());
