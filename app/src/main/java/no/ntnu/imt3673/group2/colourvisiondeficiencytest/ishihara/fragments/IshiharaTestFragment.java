@@ -35,6 +35,8 @@ public class IshiharaTestFragment extends Fragment {
     Button button;
     EditText editText;
 
+    Timer t = new Timer();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -56,21 +58,24 @@ public class IshiharaTestFragment extends Fragment {
 
         this.editText = view.findViewById(R.id.et_ishihare_test_input);
 
-        this.button = view.findViewById(R.id.btn_ishihara_test_button);
-        this.button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                activity.storeResultAndNext(editText.getText().toString());
-            }
-        });
 
-        Timer t = new Timer();
         t.schedule(new TimerTask() {
             @Override
             public void run() {
                 activity.storeResultAndNext(editText.getText().toString());
             }
         }, 5000);
+
+        this.button = view.findViewById(R.id.btn_ishihara_test_button);
+        this.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                t.cancel();
+                activity.storeResultAndNext(editText.getText().toString());
+            }
+        });
+
+
 
         Log.d(TAG, "Test fragment created : " + imageFile.getAbsolutePath() +  " : " + imageFile.exists());
     }
