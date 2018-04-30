@@ -53,4 +53,6 @@
     </string>
     <string name="iv_test_welcome_info_brightness_desc">Image file that shows 11 grey patches, for brightness calibration.</string>
 
+    <string name="btn_open_test">Open test</string>
+
 </resources>

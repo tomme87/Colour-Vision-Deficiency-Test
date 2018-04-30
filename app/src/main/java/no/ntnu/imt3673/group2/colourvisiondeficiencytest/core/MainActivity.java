@@ -82,6 +82,13 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
     }
 
+    public void startWelcomeFragmentFromDownloadInfo(TestInfo testInfo) {
+        this.currentTestInfo = testInfo;
+        Log.d(TAG, "List size: " + this.localTestInfos.size());
+        getFragmentManager().beginTransaction()
+                .replace(android.R.id.content, new TestWelcomeFragment())
+                .commit();
+    }
 
     public void startDownloadInfoFragment(TestInfo testInfo) {
         this.currentTestInfo = testInfo;
