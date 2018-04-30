@@ -48,7 +48,7 @@
     </string>
     <string name="tv_test_welcome_info_brightness_title">Brightness Calibration</string>
     <string name="tv_test_welcome_info_brightness_content">
-        Please adjust the brightness of your device so that you see all 11 areas/slices of the circle.
+        If necessary, please adjust the brightness of your device so that you see all 11 areas/slices of the circle.
         This will change your devices' brightness, but is important for taking the test.
     </string>
     <string name="iv_test_welcome_info_brightness_desc">Image file that shows 11 grey patches, for brightness calibration.</string>
