@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.R;
@@ -27,6 +28,10 @@ public class DownloadInfoFragment extends Fragment {
 
     private MainActivity mainActivity;
 
+    private TextView tv_test_name;
+    private TextView tv_test_type;
+    private TextView tv_test_desc;
+
     private Button button;
 
     public DownloadInfoFragment() {
@@ -43,10 +48,20 @@ public class DownloadInfoFragment extends Fragment {
 
         Log.d(TAG, "Test for test: " + testInfo.getName());
 
-
-
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_download_info, container, false);
+        View view = inflater.inflate(R.layout.fragment_download_info, container, false);
+
+        //  Set the text information
+        this.tv_test_name = view.findViewById(R.id.tv_dl_info_name);
+        this.tv_test_name.setText(testInfo.getName());
+
+        this.tv_test_type = view.findViewById(R.id.tv_dl_info_type_this_test);
+        this.tv_test_type.setText(testInfo.getType());
+
+        this.tv_test_desc = view.findViewById(R.id.tv_dl_info_desc_this_test);
+        this.tv_test_desc.setText(testInfo.getDescription());
+
+        return view;
     }
 
     @Override

@@ -21,4 +21,8 @@
     <string name="results_ishihara_protan">Red-Green deficiency (Protan)</string>
     <string name="results_ishihara_total">Strong colour deficiency</string>
     <string name="results_ishihara_uncertain">Uncertain test results</string>
+
+    <string name="tv_download_test_type">Test Type: </string>
+    <string name="tv_download_test_desc">Test Description: </string>
+
 </resources>
