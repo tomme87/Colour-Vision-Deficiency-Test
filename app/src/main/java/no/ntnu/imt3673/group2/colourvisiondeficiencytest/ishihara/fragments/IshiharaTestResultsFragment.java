@@ -93,8 +93,10 @@ public class IshiharaTestResultsFragment extends Fragment {
         Gson gson = new Gson();
 
 
+        String payload = gson.toJson(this.activity.getResults());
+        Log.d(TAG, "Payload: " + payload);
 
-        GsonPostRequest<String> request = new GsonPostRequest<>(this.testInfo.getResourceUrl(), gson.toJson(this.activity.getResults()),
+        GsonPostRequest<String> request = new GsonPostRequest<>(this.testInfo.getResourceUrl(), payload,
                 String.class, null, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
