@@ -43,4 +43,6 @@
         The test has to be completed in one sitting, for the best possible accuracy.
     </string>
 
+    <string name="btn_open_test">Open test</string>
+
 </resources>
