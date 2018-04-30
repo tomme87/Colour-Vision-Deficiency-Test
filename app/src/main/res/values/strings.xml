@@ -25,4 +25,10 @@
     <string name="tv_download_test_type">Test Type: </string>
     <string name="tv_download_test_desc">Test Description: </string>
 
+    <string name="tv_test_welcome_info_general_title">General test information: </string>
+    <string name="tv_test_welcome_info_general_content">
+        Please sit in a well lit area while taking the test.
+        The test has to be completed in one sitting, for the best possible accuracy.
+    </string>
+
 </resources>
