@@ -1,5 +1,6 @@
 package no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara;
 
+import android.app.FragmentTransaction;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import no.ntnu.imt3673.group2.colourvisiondeficiencytest.R;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.ResultSet;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.Test;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
@@ -57,7 +59,8 @@ public class IshiharaTestActivity extends AppCompatActivity {
         Log.d(TAG, "Size after: " + test.getPlates().size());
 
         IshiharaTestFragment fragment = new IshiharaTestFragment();
-        getFragmentManager().beginTransaction()
+        getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                 .replace(android.R.id.content, fragment)
                 //.addToBackStack(null)
                 .commit();
@@ -117,7 +120,8 @@ public class IshiharaTestActivity extends AppCompatActivity {
 
     private void runIshiharaTestSummary() {
         IshiharaTestResultsFragment fragment = new IshiharaTestResultsFragment();
-        getFragmentManager().beginTransaction()
+        getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                 .replace(android.R.id.content, fragment)
                 //.addToBackStack(null)
                 .commit();

@@ -2,8 +2,8 @@ package no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara.fragments;
 
 
 import android.os.Bundle;
-import android.app.Fragment;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.R;
@@ -38,6 +40,8 @@ public class IshiharaTestResultsFragment extends Fragment {
     Button btnExit;
     TextView tvResults;
 
+    RequestQueue queue;
+
 
     public IshiharaTestResultsFragment() {
         // Required empty public constructor
@@ -50,7 +54,7 @@ public class IshiharaTestResultsFragment extends Fragment {
         this.activity = (IshiharaTestActivity) getActivity();
         this.testInfo = this.activity.getTestInfo();
 
-
+        this.queue = Volley.newRequestQueue(getContext());
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_ishihara_test_results, container, false);
@@ -89,7 +93,8 @@ public class IshiharaTestResultsFragment extends Fragment {
         Gson gson = new Gson();
 
 
-        new GsonPostRequest<String>(this.testInfo.getResourceUrl(), gson.toJson(this.activity.getResults()),
+
+        GsonPostRequest<String> request = new GsonPostRequest<>(this.testInfo.getResourceUrl(), gson.toJson(this.activity.getResults()),
                 String.class, null, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -103,6 +108,9 @@ public class IshiharaTestResultsFragment extends Fragment {
                 Toast.makeText(getContext(), R.string.response_testresult_sent_error, Toast.LENGTH_LONG).show();
             }
         });
+
+        this.queue.add(request);
+
     }
 
     private int formatResults() {
