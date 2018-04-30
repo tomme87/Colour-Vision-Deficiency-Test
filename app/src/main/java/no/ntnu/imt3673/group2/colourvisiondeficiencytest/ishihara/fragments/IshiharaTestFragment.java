@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.R;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.Test;
@@ -62,6 +64,13 @@ public class IshiharaTestFragment extends Fragment {
             }
         });
 
+        Timer t = new Timer();
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                activity.storeResultAndNext(editText.getText().toString());
+            }
+        }, 5000);
 
         Log.d(TAG, "Test fragment created : " + imageFile.getAbsolutePath() +  " : " + imageFile.exists());
     }
