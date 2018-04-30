@@ -36,7 +36,7 @@ public class TestWelcomeFragment extends Fragment {
 
         this.testActivityClassFactory = new TestActivityClassFactory();
         this.mainActivity = (MainActivity) getActivity();
-
+        this.mainActivity.setActionBarTitle(getString(R.string.app_name_info_fragment));
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_test_welcome, container, false);
     }

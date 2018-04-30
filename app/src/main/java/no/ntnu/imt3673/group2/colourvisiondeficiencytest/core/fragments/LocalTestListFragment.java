@@ -56,7 +56,8 @@ public class LocalTestListFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         mainActivity = (MainActivity) getActivity();
-        // Inflate the layout for this fragment
+        mainActivity.setActionBarTitle(getString(R.string.app_name_local_fragment));
+       // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_local_test_list, container, false);
     }
 

@@ -1,5 +1,12 @@
 <resources>
     <string name="app_name">Colour Vision Deficiency Test</string>
+    <string name="app_name_local_fragment">Downloaded Tests</string>
+    <string name="app_name_available_fragment">Available Tests</string>
+    <string name="app_name_info_fragment">Test info</string>
+    <string name="app_name_welcome_fragment">Start a new test</string>
+
+
+
     <string name="ishihara_test_plate_image_description">The image of the current test plate.</string>
     <string name="ishihara_test_plate_input">What you see.</string>
     <string name="ishihara_test_next_btn">Next</string>

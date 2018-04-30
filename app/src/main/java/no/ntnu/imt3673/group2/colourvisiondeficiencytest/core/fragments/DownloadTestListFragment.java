@@ -60,6 +60,7 @@ public class DownloadTestListFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         this.mainActivity = (MainActivity) getActivity();
+        this.mainActivity.setActionBarTitle(getString(R.string.app_name_available_fragment));
 
         this.queue = Volley.newRequestQueue(getContext());
 
