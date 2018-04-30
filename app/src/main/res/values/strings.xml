@@ -15,7 +15,6 @@
 
     <string name="btn_start_test">Start Test</string>
 
-    <string name="tv_download_test_name">Test Name: </string>
     <string name="tv_download_test_type">Test Type: </string>
     <string name="tv_download_test_desc">Test Description: </string>
 </resources>

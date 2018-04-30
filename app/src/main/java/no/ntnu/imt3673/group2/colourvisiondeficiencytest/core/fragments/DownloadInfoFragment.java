@@ -51,20 +51,15 @@ public class DownloadInfoFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_download_info, container, false);
 
+        //  Set the text information
         this.tv_test_name = view.findViewById(R.id.tv_dl_info_name);
-        String nameString = getResources().getString(R.string.tv_download_test_name) +
-                " " + testInfo.getName();
-        this.tv_test_name.setText(nameString);
+        this.tv_test_name.setText(testInfo.getName());
 
-        this.tv_test_type = view.findViewById(R.id.tv_dl_info_type);
-        String typeString = getResources().getString(R.string.tv_download_test_type) +
-                " " + testInfo.getType();
-        this.tv_test_type.setText(typeString);
+        this.tv_test_type = view.findViewById(R.id.tv_dl_info_type_this_test);
+        this.tv_test_type.setText(testInfo.getType());
 
-        this.tv_test_desc = view.findViewById(R.id.tv_dl_info_desc);
-        String descString = getResources().getString(R.string.tv_download_test_desc) +
-                " " + testInfo.getDescription();
-        this.tv_test_desc.setText(descString);
+        this.tv_test_desc = view.findViewById(R.id.tv_dl_info_desc_this_test);
+        this.tv_test_desc.setText(testInfo.getDescription());
 
         return view;
     }
