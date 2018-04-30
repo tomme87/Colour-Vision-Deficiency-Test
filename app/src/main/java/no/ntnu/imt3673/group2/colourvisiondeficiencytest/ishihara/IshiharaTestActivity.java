@@ -1,5 +1,6 @@
 package no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara;
 
+import android.app.FragmentTransaction;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,7 +17,10 @@ import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import no.ntnu.imt3673.group2.colourvisiondeficiencytest.R;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.ResultSet;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.Test;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
@@ -57,7 +61,8 @@ public class IshiharaTestActivity extends AppCompatActivity {
         Log.d(TAG, "Size after: " + test.getPlates().size());
 
         IshiharaTestFragment fragment = new IshiharaTestFragment();
-        getFragmentManager().beginTransaction()
+        getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                 .replace(android.R.id.content, fragment)
                 //.addToBackStack(null)
                 .commit();
@@ -68,6 +73,7 @@ public class IshiharaTestActivity extends AppCompatActivity {
         Integer firstPlate = testInfo.getFirstPlate();
         if(firstPlate != null) {
             for (int i = 0; i < this.test.getPlates().size(); i++) {
+
                 if (this.test.getPlates().get(i).getId() == firstPlate) {
                     runIshiharaTestFragment(i);
                     return;
@@ -117,7 +123,8 @@ public class IshiharaTestActivity extends AppCompatActivity {
 
     private void runIshiharaTestSummary() {
         IshiharaTestResultsFragment fragment = new IshiharaTestResultsFragment();
-        getFragmentManager().beginTransaction()
+        getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                 .replace(android.R.id.content, fragment)
                 //.addToBackStack(null)
                 .commit();

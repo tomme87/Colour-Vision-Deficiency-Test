@@ -1,7 +1,10 @@
 package no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.fragments;
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.Nullable;
@@ -16,7 +19,6 @@ import android.widget.Toast;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.R;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.MainActivity;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
-import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.database.AddLocalTest;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.services.DownloadTestService;
 
 /**
@@ -32,7 +34,10 @@ public class DownloadInfoFragment extends Fragment {
     private TextView tv_test_type;
     private TextView tv_test_desc;
 
-    private Button button;
+    private Button btnDownload;
+    private Button btnRunTest;
+
+    private DownloadProcessedReceiver downloadProcessedReceiver;
 
     public DownloadInfoFragment() {
         // Required empty public constructor
@@ -67,17 +72,28 @@ public class DownloadInfoFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        this.button = getView().findViewById(R.id.btn_download);
-        this.button.setOnClickListener(new View.OnClickListener() {
+        this.btnDownload = view.findViewById(R.id.btn_download);
+        this.btnDownload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBtnDownload(view);
             }
         });
+        this.btnRunTest = view.findViewById(R.id.btn_run_test);
+        this.btnRunTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mainActivity.startWelcomeFragmentFromDownloadInfo(testInfo);
+            }
+        });
+        this.btnRunTest.setEnabled(false);
+        this.downloadProcessedReceiver = new DownloadProcessedReceiver();
+        getActivity().registerReceiver(this.downloadProcessedReceiver, new IntentFilter(DownloadProcessedReceiver.ACTION_RESP));
     }
 
     public void onBtnDownload(View view) {
         Log.d(TAG, "Downloading id: " + testInfo.getId());
+        btnDownload.setEnabled(false);
 
         for(TestInfo testInfoCheck : mainActivity.getLocalTestInfos()) {
             if(testInfoCheck.getId().equals(testInfo.getId())) {
@@ -90,6 +106,17 @@ public class DownloadInfoFragment extends Fragment {
         Intent i = new Intent(getContext(), DownloadTestService.class);
         i.putExtra(TestInfo.EXTRA, testInfo);
         DownloadTestService.enqueueWork(getContext(), i);
+    }
+
+    public class DownloadProcessedReceiver extends BroadcastReceiver {
+        public static final String ACTION_RESP = "DlProcessedReciver";
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.d(TAG, "Processed done received");
+            btnRunTest.setEnabled(true);
+
+        }
     }
 
 }
