@@ -10,14 +10,12 @@
     <string name="ishihara_test_next_btn">Next</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- Change this url to the json desired url for the json response of available tests -->
     <string name="url_test_list">http://folk.ntnu.no/tomaszmr/md/TestList.json</string>
     <string name="btn_download_text">Download</string>
 
     <string name="error_already_downloading">Already downloading this test</string>
-    <string name="btn_run_text">Run Test</string>
 
     <string name="btn_start_test">Start Test</string>
 
@@ -25,7 +23,6 @@
     <string name="results_ishihara_general_red_green">General Red-Green colour deficiency</string>
     <string name="results_ishihara_deutan">Red-Green deficiency (Deutan)</string>
     <string name="results_ishihara_protan">Red-Green deficiency (Protan)</string>
-    <string name="results_ishihara_total">Strong colour deficiency</string>
     <string name="results_ishihara_uncertain">Uncertain test results</string>
 
     <string name="tv_download_test_type">Test Type</string>
@@ -53,10 +50,12 @@
     <string name="tv_test_welcome_info_brightness_title">Brightness Calibration</string>
     <string name="tv_test_welcome_info_brightness_content">
         If necessary, please adjust the brightness of your device so that you see all 11 areas/slices of the circle.
-        This will change your devices' brightness, but is important for taking the test.
+        This will change your devices\' brightness, but is important for taking the test.
     </string>
     <string name="iv_test_welcome_info_brightness_desc">Image file that shows 11 grey patches, for brightness calibration.</string>
 
     <string name="btn_open_test">Open test</string>
+
+    <string name="iv_test_icon_string">Test thumb</string>
 
 </resources>
