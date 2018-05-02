@@ -33,7 +33,6 @@ import no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara.IshiharaThresh
 public class IshiharaTestResultsFragment extends Fragment {
 
     private static final String TAG = "IshiharaTestResults";
-    IshiharaTestActivity activity;
     TestInfo testInfo;
 
     Button btnSend;
@@ -53,16 +52,15 @@ public class IshiharaTestResultsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        this.activity = (IshiharaTestActivity) getActivity();
 
         try {
-            this.callback = activity;
+            this.callback = (OnGetActivityDataListener) getActivity();
         } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
+            throw new ClassCastException(getActivity().toString()
                     + " must implement OnGetActivityDataListener");
         }
 
-        this.testInfo = this.activity.getTestInfo();
+        this.testInfo = this.callback.getTestInfo();
 
         this.queue = Volley.newRequestQueue(getContext());
 
@@ -151,6 +149,8 @@ public class IshiharaTestResultsFragment extends Fragment {
      */
     public interface OnGetActivityDataListener {
         IshiharaThreshold getIshiharaThreshold();
+
+        TestInfo getTestInfo();
 
         ResultSet<IshiharaResult> getResultSet();
     }
