@@ -5,8 +5,6 @@
     <string name="app_name_info_fragment">Test info</string>
     <string name="app_name_welcome_fragment">Start a new test</string>
 
-
-
     <string name="ishihara_test_plate_image_description">The image of the current test plate.</string>
     <string name="ishihara_test_plate_input">What you see.</string>
     <string name="ishihara_test_next_btn">Next</string>
@@ -14,6 +12,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- Change this url to the json desired url for the json response of available tests -->
     <string name="url_test_list">http://folk.ntnu.no/tomaszmr/md/TestList.json</string>
     <string name="btn_download_text">Download</string>
 
@@ -35,8 +34,13 @@
     <string name="response_testresult_sent">Test data sent</string>
     <string name="response_testresult_sent_error">Unable to send test data!</string>
 
-    <string name="btn_send_and_exit">Send result to researcher</string>
-    <string name="btn_exit">Exit</string>
+    <string name="tv_test_result_title_stub"> is finished</string>
+    <string name="tv_test_result_pre_result_txt">Based on your answers we believe your colour vision is:</string>
+    <string name="tv_test_result_send_researcher">
+        Would you like to send the test answers to the researcher? No personal information is collected.
+    </string>
+    <string name="btn_send_and_exit">Yes, send and exit</string>
+    <string name="btn_exit">No, just exit</string>
 
     <string name="tv_test_welcome_info_type">Test Type</string>
     <string name="tv_test_welcome_info_desc">Test Description</string>
