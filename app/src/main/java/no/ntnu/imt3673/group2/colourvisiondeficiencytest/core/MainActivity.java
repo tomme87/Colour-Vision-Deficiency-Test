@@ -1,9 +1,6 @@
 package no.ntnu.imt3673.group2.colourvisiondeficiencytest.core;
 
 import android.app.DownloadManager;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,7 +14,7 @@ import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.fragments.Download
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.fragments.LocalTestListFragment;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.fragments.TestWelcomeFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnGetActivityDataListener {
     private static final String TAG = "MainActivity";
 
     // Local and downloadable list. final is important!!
@@ -27,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
     private DownloadCompleteReceiver downloadCompleteReceiver;
 
     TestInfo currentTestInfo; // TODO I don't think the use of this variable is good. look at Parcelable instead...?
-
 
 
     @Override
@@ -53,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
      * Show the list of locally downloaded tests.
      */
     public void startLocalListFragment() {
-        getFragmentManager().beginTransaction()
+        getSupportFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new LocalTestListFragment())
                 .commit();
     }
@@ -62,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
      * Show the list of downloadable tests.
      */
     public void startDownloadFragment() {
-        getFragmentManager().beginTransaction()
+        getSupportFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new DownloadTestListFragment())
                 .addToBackStack(null)
                 .commit();
@@ -70,22 +66,21 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Show the welcome screen for a test.
-     *
-     *
      */
     public void startWelcomeFragment(TestInfo testInfo) {
         this.currentTestInfo = testInfo;
         Log.d(TAG, "List size: " + this.localTestInfos.size());
-        getFragmentManager().beginTransaction()
+        getSupportFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new TestWelcomeFragment())
                 .addToBackStack(null)
                 .commit();
     }
 
+    @Override
     public void startWelcomeFragmentFromDownloadInfo(TestInfo testInfo) {
         this.currentTestInfo = testInfo;
         Log.d(TAG, "List size: " + this.localTestInfos.size());
-        getFragmentManager().beginTransaction()
+        getSupportFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new TestWelcomeFragment())
                 .commit();
     }
@@ -94,12 +89,13 @@ public class MainActivity extends AppCompatActivity {
         this.currentTestInfo = testInfo;
         Log.d(TAG, "List size: " + this.downloadableTestInfos.size());
 
-        getFragmentManager().beginTransaction()
+        getSupportFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new DownloadInfoFragment())
                 .addToBackStack(null)
                 .commit();
     }
 
+    @Override
     public List<TestInfo> getLocalTestInfos() {
         return localTestInfos;
     }
@@ -108,16 +104,8 @@ public class MainActivity extends AppCompatActivity {
         return downloadableTestInfos;
     }
 
+    @Override
     public TestInfo getCurrentTestInfo() {
         return currentTestInfo;
-    }
-
-    /**
-     * Changes Action Bar title
-     * https://stackoverflow.com/questions/28389841/change-actionbar-title-using-fragments
-     * @param title
-     */
-    public void setActionBarTitle(String title) {
-        getSupportActionBar().setTitle(title);
     }
 }

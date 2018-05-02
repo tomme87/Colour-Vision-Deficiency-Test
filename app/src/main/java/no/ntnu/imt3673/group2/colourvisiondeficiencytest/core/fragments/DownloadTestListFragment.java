@@ -3,8 +3,8 @@ package no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,27 +24,27 @@ import java.util.List;
 
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.R;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.GsonGetRequest;
-import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.MainActivity;
+import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.OnGetActivityDataListener;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.adapters.TestListAdapter;
 
 
 /**
  * A simple {@link Fragment} subclass.
- *
+ * <p>
  * This fragment shows a list of available test that
  * have not been downloaded yet.
  */
 public class DownloadTestListFragment extends Fragment {
 
     private static final String TAG = "DlTestListFrag";
-    private RecyclerView recyclerView;
     private TestListAdapter testListAdapter;
 
     private GsonGetRequest<TestInfo[]> request;
     private RequestQueue queue;
 
-    private MainActivity mainActivity;
+    //private MainActivity mainActivity;
+    private OnGetActivityDataListener callback;
 
     public DownloadTestListFragment() {
         // Required empty public constructor
@@ -55,8 +55,14 @@ public class DownloadTestListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        this.mainActivity = (MainActivity) getActivity();
-        this.mainActivity.setActionBarTitle(getString(R.string.app_name_available_fragment));
+        try {
+            this.callback = (OnGetActivityDataListener) getActivity();
+        } catch (ClassCastException e) {
+            throw new ClassCastException(getActivity().toString()
+                    + " must implement OnGetActivityDataListener");
+        }
+
+        getActivity().setTitle(R.string.app_name_available_fragment);
 
         this.queue = Volley.newRequestQueue(getContext());
 
@@ -82,18 +88,18 @@ public class DownloadTestListFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        this.recyclerView = getView().findViewById(R.id.rv_download_test_list);
-        this.testListAdapter = new TestListAdapter(getContext(), mainActivity.getDownloadableTestInfos());
+        RecyclerView recyclerView = view.findViewById(R.id.rv_download_test_list);
+        this.testListAdapter = new TestListAdapter(getContext(), callback.getDownloadableTestInfos());
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         // Divider between elements: https://stackoverflow.com/a/27037230
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
                 layoutManager.getOrientation());
 
-        this.recyclerView.setAdapter(testListAdapter);
-        this.recyclerView.addItemDecoration(dividerItemDecoration);
-        this.recyclerView.setLayoutManager(layoutManager);
-        this.recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getContext()));
+        recyclerView.setAdapter(testListAdapter);
+        recyclerView.addItemDecoration(dividerItemDecoration);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getContext()));
 
         Log.d(TAG, "View created");
     }
@@ -114,10 +120,11 @@ public class DownloadTestListFragment extends Fragment {
 
     /**
      * Shows a fragment with detailed information of a test
+     *
      * @param testInfo Information Object about a test
      */
     private void showDownloadInfoFragment(TestInfo testInfo) {
-        mainActivity.startDownloadInfoFragment(testInfo);
+        this.callback.startDownloadInfoFragment(testInfo);
     }
 
     /**
@@ -126,29 +133,29 @@ public class DownloadTestListFragment extends Fragment {
      * @param response Array with test info objects.
      * @return Array with test info objects.
      */
-    public TestInfo[] updateAvailableTestList(TestInfo[] response){
+    public TestInfo[] updateAvailableTestList(TestInfo[] response) {
         //Get Local Tests from DB
-        List <TestInfo> localTestsList=mainActivity.getLocalTestInfos();
+        List<TestInfo> localTestsList = this.callback.getLocalTestInfos();
 
-        TestInfo[] notDownloadedTests = new TestInfo[response.length-localTestsList.size()];
+        TestInfo[] notDownloadedTests = new TestInfo[response.length - localTestsList.size()];
 
-        Log.d("UpdateTestList","Response size: "+ response.length+ " LocalListTest Size: " +localTestsList.size() + " NotDownloaded Size: " + notDownloadedTests.length );
+        Log.d("UpdateTestList", "Response size: " + response.length + " LocalListTest Size: " + localTestsList.size() + " NotDownloaded Size: " + notDownloadedTests.length);
         boolean downloaded = false;
-        int count=0;
+        int count = 0;
 
-        for (int i=0; i < response.length; i++) {
+        for (int i = 0; i < response.length; i++) {
 
-            for( int j=0; j < localTestsList.size() ; j++){
+            for (int j = 0; j < localTestsList.size(); j++) {
 
-                if(response[i].getId().equals(localTestsList.get(j).getId())){
-                    Log.d("UpdateTestList", "Equal Test Response: " +i+ "Equal Test Local:" +j);
-                    downloaded=true;
+                if (response[i].getId().equals(localTestsList.get(j).getId())) {
+                    Log.d("UpdateTestList", "Equal Test Response: " + i + "Equal Test Local:" + j);
+                    downloaded = true;
                 }
             }
 
-            if(downloaded==false) {
-                Log.d("UpdateTestList", "Count: "+count );
-                notDownloadedTests[count]=response[i];
+            if (!downloaded) {
+                Log.d("UpdateTestList", "Count: " + count);
+                notDownloadedTests[count] = response[i];
                 count++;
             }
             downloaded = false;
@@ -164,6 +171,7 @@ public class DownloadTestListFragment extends Fragment {
     private class RecyclerTouchListener extends RecyclerView.SimpleOnItemTouchListener {
 
         private GestureDetector gestureDetector;
+
         RecyclerTouchListener(Context context) {
             this.gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
                 @Override

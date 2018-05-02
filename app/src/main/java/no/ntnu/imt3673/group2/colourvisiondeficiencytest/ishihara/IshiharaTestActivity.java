@@ -14,8 +14,8 @@ import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara.fragments.IshiharaTestFragment;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara.fragments.IshiharaTestResultsFragment;
 
-public class IshiharaTestActivity extends AppCompatActivity implements IshiharaTestResultsFragment.OnGetActivityDataListener,
-        CreateTestObject.OnTaskDone, CreateThresholdObject.OnTaskDone, IshiharaTestFragment.OnGetActivityDataListener {
+public class IshiharaTestActivity extends AppCompatActivity implements OnGetActivityDataListener,
+        CreateTestObject.OnTaskDone, CreateThresholdObject.OnTaskDone {
     private static final String TAG = "IshiharaTestActivity";
 
     private Test<IshiharaPlate> mTest;

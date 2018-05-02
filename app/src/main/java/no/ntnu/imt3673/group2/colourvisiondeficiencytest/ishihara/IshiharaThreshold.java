@@ -7,6 +7,7 @@ package no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara;
 public class IshiharaThreshold {
     private Integer normal;
     private Integer deficiency;
+    private Integer timeLimit;
 
     public IshiharaThreshold() {
     }
@@ -25,5 +26,13 @@ public class IshiharaThreshold {
 
     public void setDeficiency(Integer deficiency) {
         this.deficiency = deficiency;
+    }
+
+    public Integer getTimeLimit() {
+        return timeLimit;
+    }
+
+    public void setTimeLimit(Integer timeLimit) {
+        this.timeLimit = timeLimit;
     }
 }

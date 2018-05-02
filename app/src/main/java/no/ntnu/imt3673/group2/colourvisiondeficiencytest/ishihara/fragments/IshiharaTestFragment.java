@@ -24,10 +24,11 @@ import no.ntnu.imt3673.group2.colourvisiondeficiencytest.R;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.Test;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara.IshiharaPlate;
+import no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara.OnGetActivityDataListener;
 
 public class IshiharaTestFragment extends Fragment {
     private static final String TAG = "IshiharaTestFragment";
-    private static final int TIMER_MAX = 8000;
+    private static final int TIMER_MAX = 5000;
     IshiharaPlate plate;
     TestInfo testInfo;
 
@@ -73,11 +74,17 @@ public class IshiharaTestFragment extends Fragment {
 
         FragmentActivity activity = getActivity();
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.showSoftInput(this.editText, InputMethodManager.SHOW_IMPLICIT);
+        if (imm != null) {
+            imm.showSoftInput(this.editText, InputMethodManager.SHOW_IMPLICIT);
+        }
 
+        Integer timeLimit = this.callback.getIshiharaThreshold().getTimeLimit();
+        if(timeLimit == null || timeLimit < 0) {
+            timeLimit = TIMER_MAX;
+        }
 
         this.progressBar = view.findViewById(R.id.pb_timer);
-        this.progressBar.setMax(TIMER_MAX);
+        this.progressBar.setMax(timeLimit);
 
         timer = new CountDownTimer(TIMER_MAX, 100) {
 
@@ -109,16 +116,8 @@ public class IshiharaTestFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(this.timer != null) {
+        if (this.timer != null) {
             this.timer.cancel();
         }
-    }
-
-    public interface OnGetActivityDataListener {
-        IshiharaPlate getCurrentPlate();
-
-        TestInfo getTestInfo();
-
-        void storeResultAndNext(String result);
     }
 }

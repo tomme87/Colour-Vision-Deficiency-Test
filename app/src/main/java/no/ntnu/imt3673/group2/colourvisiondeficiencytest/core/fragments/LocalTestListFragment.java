@@ -6,9 +6,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,9 +21,8 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.GsonGetRequest;
-import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.MainActivity;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.R;
+import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.OnGetActivityDataListener;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.adapters.TestListAdapter;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.database.GetAllLocalTests;
@@ -37,13 +36,11 @@ import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.database.GetAllLoc
 public class LocalTestListFragment extends Fragment {
 
     private static final String TAG = "LcTestListFrag";
-    private RecyclerView recyclerView;
     private TestListAdapter testListAdapter;
-    MainActivity mainActivity;
-
-    private GsonGetRequest<TestInfo[]> request;
 
     private DownloadProcessedReceiver downloadProcessedReceiver;
+
+    private OnGetActivityDataListener callback;
 
     public LocalTestListFragment() {
         // Required empty public constructor
@@ -54,9 +51,15 @@ public class LocalTestListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        mainActivity = (MainActivity) getActivity();
-        mainActivity.setActionBarTitle(getString(R.string.app_name_local_fragment));
-       // Inflate the layout for this fragment
+        try {
+            this.callback = (OnGetActivityDataListener) getActivity();
+        } catch (ClassCastException e) {
+            throw new ClassCastException(getActivity().toString()
+                    + " must implement OnGetActivityDataListener");
+        }
+
+        getActivity().setTitle(R.string.app_name_local_fragment);
+        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_local_test_list, container, false);
     }
 
@@ -64,30 +67,30 @@ public class LocalTestListFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
         // Downloead button and Change into StartDownloadFragment
-        FloatingActionButton floatingActionButton = getView().findViewById(R.id.fab_open_download_list);
+        FloatingActionButton floatingActionButton = view.findViewById(R.id.fab_open_download_list);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mainActivity.startDownloadFragment();
+                callback.startDownloadFragment();
             }
         });
 
 
         //Populate RecycleView
-        this.recyclerView = getView().findViewById(R.id.rv_local_test_list);
-        this.testListAdapter = new TestListAdapter(getContext(), mainActivity.getLocalTestInfos());
+        RecyclerView recyclerView = view.findViewById(R.id.rv_local_test_list);
+        this.testListAdapter = new TestListAdapter(getContext(), this.callback.getLocalTestInfos());
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         // Divider between elements: https://stackoverflow.com/a/27037230
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
                 layoutManager.getOrientation());
 
-        this.recyclerView.setAdapter(testListAdapter);
-        this.recyclerView.addItemDecoration(dividerItemDecoration);
-        this.recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(testListAdapter);
+        recyclerView.addItemDecoration(dividerItemDecoration);
+        recyclerView.setLayoutManager(layoutManager);
 
         //OBS OBS OBS!!!
-        this.recyclerView.addOnItemTouchListener( new RecyclerTouchListener(getContext()));
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getContext()));
         Log.d(TAG, "View created");
 
         this.downloadProcessedReceiver = new DownloadProcessedReceiver();
@@ -120,10 +123,11 @@ public class LocalTestListFragment extends Fragment {
 
     /**
      * This method shows the welcome fragment when running a test
+     *
      * @param testInfo Object that contains the details about a test.
      */
     private void showTestWelcomeFragment(TestInfo testInfo) {
-        mainActivity.startWelcomeFragment(testInfo);
+        this.callback.startWelcomeFragment(testInfo);
     }
 
     /**
@@ -167,6 +171,4 @@ public class LocalTestListFragment extends Fragment {
             updateLocalList();
         }
     }
-
-
 }

@@ -20,12 +20,9 @@ import com.google.gson.Gson;
 
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.R;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.GsonPostRequest;
-import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.ResultSet;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara.IshiharaCalculateResults;
-import no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara.IshiharaResult;
-import no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara.IshiharaTestActivity;
-import no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara.IshiharaThreshold;
+import no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara.OnGetActivityDataListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -146,16 +143,5 @@ public class IshiharaTestResultsFragment extends Fragment {
             default:
                 return R.string.results_ishihara_uncertain;
         }
-    }
-
-    /**
-     * Interface for communtication with activity.
-     */
-    public interface OnGetActivityDataListener {
-        IshiharaThreshold getIshiharaThreshold();
-
-        TestInfo getTestInfo();
-
-        ResultSet<IshiharaResult> getResultSet();
     }
 }
