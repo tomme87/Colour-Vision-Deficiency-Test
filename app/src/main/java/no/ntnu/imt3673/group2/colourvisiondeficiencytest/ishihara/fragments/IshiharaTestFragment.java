@@ -1,13 +1,16 @@
 package no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -52,6 +55,7 @@ public class IshiharaTestFragment extends Fragment {
         this.plate = this.callback.getCurrentPlate();
         this.testInfo = this.callback.getTestInfo();
 
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_ishihara_test, container, false);
     }
@@ -64,6 +68,13 @@ public class IshiharaTestFragment extends Fragment {
         Picasso.get().load(imageFile).into(this.imageView);
 
         this.editText = view.findViewById(R.id.et_ishihare_test_input);
+
+        this.editText.requestFocus();
+
+        FragmentActivity activity = getActivity();
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(this.editText, InputMethodManager.SHOW_IMPLICIT);
+
 
         this.progressBar = view.findViewById(R.id.pb_timer);
         this.progressBar.setMax(TIMER_MAX);
@@ -93,6 +104,14 @@ public class IshiharaTestFragment extends Fragment {
 
 
         Log.d(TAG, "Test fragment created : " + imageFile.getAbsolutePath() + " : " + imageFile.exists());
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(this.timer != null) {
+            this.timer.cancel();
+        }
     }
 
     public interface OnGetActivityDataListener {
