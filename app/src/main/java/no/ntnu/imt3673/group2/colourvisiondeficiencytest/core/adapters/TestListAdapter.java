@@ -19,6 +19,7 @@ import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
  * Created by Tomme on 12.04.2018.
  */
 
+
 public class TestListAdapter extends RecyclerView.Adapter<TestListAdapter.TestListViewHolder> {
     private final LayoutInflater inflater;
     private List<TestInfo> testInfos;

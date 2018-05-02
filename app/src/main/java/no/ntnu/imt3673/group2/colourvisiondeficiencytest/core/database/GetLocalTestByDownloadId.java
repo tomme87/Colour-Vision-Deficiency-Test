@@ -7,17 +7,31 @@ import java.lang.ref.WeakReference;
 
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
 
+/**
+ * AsyncTask that reads  from the database which test are already downloaded
+ *
+ */
 public class GetLocalTestByDownloadId extends AsyncTask<Long, Void, TestInfo> {
     //private Context context;
     private final WeakReference<Context> weakContext;
     private PostExecuteListener postExecuteListener;
 
+    /**
+     * Passing application context from service accessing db
+     * @param context
+     * @param postExecuteListener
+     */
     public GetLocalTestByDownloadId(Context context, PostExecuteListener postExecuteListener) {
         //this.context = context;
         this.weakContext = new WeakReference<>(context);
         this.postExecuteListener = postExecuteListener;
     }
 
+    /**
+     * Gets form Db information of a test given its ID.Gets form Db information of a test given its ID.
+     * @param longs
+     * @return
+     */
     @Override
     protected TestInfo doInBackground(Long... longs) {
         Context context = weakContext.get();
@@ -29,6 +43,10 @@ public class GetLocalTestByDownloadId extends AsyncTask<Long, Void, TestInfo> {
         return AppDatabase.getAppDatabase(context).testInfoDAO().getByDownloadId(longs[0]);
     }
 
+    /**
+     * Updates list view when done fetching data from database
+     * @param testInfo
+     */
     @Override
     protected void onPostExecute(TestInfo testInfo) {
         if(postExecuteListener != null && testInfo != null) {
@@ -36,6 +54,10 @@ public class GetLocalTestByDownloadId extends AsyncTask<Long, Void, TestInfo> {
         }
     }
 
+    /**
+     *
+     *
+     */
     public interface PostExecuteListener {
         void onTestInfoFound(TestInfo testInfo);
     }
