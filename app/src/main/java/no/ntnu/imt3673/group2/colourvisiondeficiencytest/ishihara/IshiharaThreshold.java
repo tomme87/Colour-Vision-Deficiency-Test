@@ -1,7 +1,7 @@
 package no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara;
 
 /**
- * Created by Reyn on 30-Apr-18.
+ * Class that holds the thresholds for a Ishihara tast
  */
 
 public class IshiharaThreshold {

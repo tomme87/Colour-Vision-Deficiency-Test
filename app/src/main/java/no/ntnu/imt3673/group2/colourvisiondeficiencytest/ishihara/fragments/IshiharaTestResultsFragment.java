@@ -12,18 +12,18 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.R;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.GsonPostRequest;
+import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.ResultSet;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
-import no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara.IshiharaPlate;
+import no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara.IshiharaCalculateResults;
+import no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara.IshiharaResult;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara.IshiharaTestActivity;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara.IshiharaThreshold;
 
@@ -42,6 +42,8 @@ public class IshiharaTestResultsFragment extends Fragment {
 
     RequestQueue queue;
 
+    OnGetActivityDataListener callback;
+
 
     public IshiharaTestResultsFragment() {
         // Required empty public constructor
@@ -52,6 +54,14 @@ public class IshiharaTestResultsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         this.activity = (IshiharaTestActivity) getActivity();
+
+        try {
+            this.callback = activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnGetActivityDataListener");
+        }
+
         this.testInfo = this.activity.getTestInfo();
 
         this.queue = Volley.newRequestQueue(getContext());
@@ -70,9 +80,7 @@ public class IshiharaTestResultsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "sending results");
-                sendResults();
-                Log.d(TAG, "exiting");
-                getActivity().finish();
+                sendResultsAndFinish();
             }
         });
 
@@ -89,11 +97,10 @@ public class IshiharaTestResultsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
-    private void sendResults() {
+    private void sendResultsAndFinish() {
         Gson gson = new Gson();
 
-
-        String payload = gson.toJson(this.activity.getResults());
+        String payload = gson.toJson(this.callback.getResultSet());
         Log.d(TAG, "Payload: " + payload);
 
         GsonPostRequest<String> request = new GsonPostRequest<>(this.testInfo.getResourceUrl(), payload,
@@ -102,12 +109,16 @@ public class IshiharaTestResultsFragment extends Fragment {
             public void onResponse(String response) {
                 Log.d(TAG, "Response sent, got" + response);
                 Toast.makeText(getContext(), R.string.response_testresult_sent, Toast.LENGTH_LONG).show();
+                Log.d(TAG, "exiting");
+                getActivity().finish();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d(TAG, "Unable to send response : " + error.getMessage());
                 Toast.makeText(getContext(), R.string.response_testresult_sent_error, Toast.LENGTH_LONG).show();
+                Log.d(TAG, "exiting");
+                getActivity().finish();
             }
         });
 
@@ -116,25 +127,31 @@ public class IshiharaTestResultsFragment extends Fragment {
     }
 
     private int formatResults() {
-        int resultsNormal = this.activity.getCounters()[IshiharaTestActivity.NORMAL];
-        IshiharaThreshold ishiharaThreshold = this.activity.getIshiharaThreshold();
+        int result = IshiharaCalculateResults.getResult(this.callback.getIshiharaThreshold(),
+                this.callback.getResultSet().getResults());
 
-        if (resultsNormal > ishiharaThreshold.getNormal()) {
-            return R.string.results_ishihara_normal;
-        }
-        if (resultsNormal < ishiharaThreshold.getDeficiency()) {
-            if (this.activity.getCounters()[IshiharaTestActivity.DEUTAN] >
-                    this.activity.getCounters()[IshiharaTestActivity.PROTAN]) {
+        switch (result) {
+            case IshiharaCalculateResults.NORMAL:
+                return R.string.results_ishihara_normal;
+            case IshiharaCalculateResults.GENERAL_READ_GREEN:
+                return R.string.results_ishihara_general_red_green;
+            case IshiharaCalculateResults.DEUTAN:
                 return R.string.results_ishihara_deutan;
-            }
-            if (this.activity.getCounters()[IshiharaTestActivity.DEUTAN] <
-                    this.activity.getCounters()[IshiharaTestActivity.PROTAN]) {
+            case IshiharaCalculateResults.PROTAN:
                 return R.string.results_ishihara_protan;
-            }
-            return R.string.results_ishihara_general_red_green;
+            case IshiharaCalculateResults.UNCERTAIN:
+                return R.string.results_ishihara_uncertain;
+            default:
+                return R.string.results_ishihara_uncertain;
         }
+    }
 
-        return R.string.results_ishihara_uncertain;
+    /**
+     * Interface for communtication with activity.
+     */
+    public interface OnGetActivityDataListener {
+        IshiharaThreshold getIshiharaThreshold();
 
+        ResultSet<IshiharaResult> getResultSet();
     }
 }

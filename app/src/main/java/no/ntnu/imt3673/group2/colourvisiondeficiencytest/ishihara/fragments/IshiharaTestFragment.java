@@ -21,12 +21,10 @@ import no.ntnu.imt3673.group2.colourvisiondeficiencytest.R;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.Test;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara.IshiharaPlate;
-import no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara.IshiharaTestActivity;
 
 public class IshiharaTestFragment extends Fragment {
     private static final String TAG = "IshiharaTestFragment";
     private static final int TIMER_MAX = 8000;
-    IshiharaTestActivity activity;
     IshiharaPlate plate;
     TestInfo testInfo;
 
@@ -36,16 +34,23 @@ public class IshiharaTestFragment extends Fragment {
 
     ProgressBar progressBar;
 
-    //Timer t = new Timer();
     CountDownTimer timer;
+
+    OnGetActivityDataListener callback;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        this.activity = (IshiharaTestActivity) getActivity();
-        this.plate = this.activity.getCurrentPlate();
-        this.testInfo = this.activity.getTestInfo();
+        try {
+            this.callback = (OnGetActivityDataListener) getActivity();
+        } catch (ClassCastException e) {
+            throw new ClassCastException(getActivity().toString()
+                    + " must implement OnGetActivityDataListener");
+        }
+
+        this.plate = this.callback.getCurrentPlate();
+        this.testInfo = this.callback.getTestInfo();
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_ishihara_test, container, false);
@@ -72,31 +77,29 @@ public class IshiharaTestFragment extends Fragment {
 
             @Override
             public void onFinish() {
-                activity.storeResultAndNext(editText.getText().toString());
+                callback.storeResultAndNext(editText.getText().toString());
             }
 
         }.start();
-
-        /*
-        t.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                activity.storeResultAndNext(editText.getText().toString());
-            }
-        }, 5000);
-        */
 
         this.button = view.findViewById(R.id.btn_ishihara_test_button);
         this.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 timer.cancel();
-                activity.storeResultAndNext(editText.getText().toString());
+                callback.storeResultAndNext(editText.getText().toString());
             }
         });
 
 
+        Log.d(TAG, "Test fragment created : " + imageFile.getAbsolutePath() + " : " + imageFile.exists());
+    }
 
-        Log.d(TAG, "Test fragment created : " + imageFile.getAbsolutePath() +  " : " + imageFile.exists());
+    public interface OnGetActivityDataListener {
+        IshiharaPlate getCurrentPlate();
+
+        TestInfo getTestInfo();
+
+        void storeResultAndNext(String result);
     }
 }
