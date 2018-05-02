@@ -23,6 +23,9 @@ import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.services.DownloadT
 
 /**
  * A simple {@link Fragment} subclass.
+ * This fragment shows information of test that can be downloaded.
+ * The user can download the test and after that he/she can start it.
+ *
  */
 public class DownloadInfoFragment extends Fragment {
     private static final String TAG = "DlInfoFrag";
@@ -91,6 +94,12 @@ public class DownloadInfoFragment extends Fragment {
         getActivity().registerReceiver(this.downloadProcessedReceiver, new IntentFilter(DownloadProcessedReceiver.ACTION_RESP));
     }
 
+    /**
+     * A user wants to download a test.
+     * The method checks if the test is already being downloaded
+     * If not, the test is downloaded
+     * @param view the current view.
+     */
     public void onBtnDownload(View view) {
         Log.d(TAG, "Downloading id: " + testInfo.getId());
         btnDownload.setEnabled(false);
@@ -108,6 +117,9 @@ public class DownloadInfoFragment extends Fragment {
         DownloadTestService.enqueueWork(getContext(), i);
     }
 
+    /**
+     * When a test is downloaded, it will be possible to run it.
+     */
     public class DownloadProcessedReceiver extends BroadcastReceiver {
         public static final String ACTION_RESP = "DlProcessedReciver";
 

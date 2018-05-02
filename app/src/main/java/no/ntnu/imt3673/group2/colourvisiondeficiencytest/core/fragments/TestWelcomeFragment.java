@@ -22,6 +22,8 @@ import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
 
 /**
  * A simple {@link Fragment} subclass.
+ * The first fragment that is shown when an user run a test.
+ * This fragment shows information about the test that is going to be run.
  */
 public class TestWelcomeFragment extends Fragment {
     private Button button;

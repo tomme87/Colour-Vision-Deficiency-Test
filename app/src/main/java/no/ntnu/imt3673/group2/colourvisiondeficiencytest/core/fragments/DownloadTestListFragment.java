@@ -31,6 +31,9 @@ import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.adapters.TestListA
 
 /**
  * A simple {@link Fragment} subclass.
+ *
+ * This fragment shows a list of available test that
+ * have not been downloaded yet.
  */
 public class DownloadTestListFragment extends Fragment {
 
@@ -101,16 +104,28 @@ public class DownloadTestListFragment extends Fragment {
         getNewList();
     }
 
-    
 
+    /**
+     * Fetchs a new test list from the server
+     */
     private void getNewList() {
         this.queue.add(this.request);
     }
 
+    /**
+     * Shows a fragment with detailed information of a test
+     * @param testInfo Information Object about a test
+     */
     private void showDownloadInfoFragment(TestInfo testInfo) {
         mainActivity.startDownloadInfoFragment(testInfo);
     }
 
+    /**
+     * Gets a list with available test that have not been downloaded yet
+     *
+     * @param response Array with test info objects.
+     * @return Array with test info objects.
+     */
     public TestInfo[] updateAvailableTestList(TestInfo[] response){
         //Get Local Tests from DB
         List <TestInfo> localTestsList=mainActivity.getLocalTestInfos();
@@ -143,6 +158,9 @@ public class DownloadTestListFragment extends Fragment {
         return notDownloadedTests;
     }
 
+    /**
+     * Handles clicks on the available test list.
+     */
     private class RecyclerTouchListener extends RecyclerView.SimpleOnItemTouchListener {
 
         private GestureDetector gestureDetector;
@@ -154,6 +172,7 @@ public class DownloadTestListFragment extends Fragment {
                 }
             });
         }
+
 
         @Override
         public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {

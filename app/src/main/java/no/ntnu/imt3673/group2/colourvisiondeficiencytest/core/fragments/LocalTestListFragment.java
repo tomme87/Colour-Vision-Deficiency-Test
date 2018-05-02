@@ -31,6 +31,8 @@ import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.database.GetAllLoc
 
 /**
  * A simple {@link Fragment} subclass.
+ * This fragment shows a list with the test
+ * that have been already downloaded.
  */
 public class LocalTestListFragment extends Fragment {
 
@@ -96,7 +98,9 @@ public class LocalTestListFragment extends Fragment {
     }
 
 
-
+    /**
+     * Update the list with the test that have been already downloaded.
+     */
     public void updateLocalList() {
         //Get Local Tests from DB
         new GetAllLocalTests(getContext()) {
@@ -114,10 +118,17 @@ public class LocalTestListFragment extends Fragment {
         getActivity().unregisterReceiver(this.downloadProcessedReceiver);
     }
 
+    /**
+     * This method shows the welcome fragment when running a test
+     * @param testInfo Object that contains the details about a test.
+     */
     private void showTestWelcomeFragment(TestInfo testInfo) {
         mainActivity.startWelcomeFragment(testInfo);
     }
 
+    /**
+     * Handles clicks on the test local test list
+     */
     private class RecyclerTouchListener extends RecyclerView.SimpleOnItemTouchListener {
         private GestureDetector gestureDetector;
 
@@ -144,6 +155,9 @@ public class LocalTestListFragment extends Fragment {
     }
 
 
+    /**
+     * Update the list that shows the test that have been downloaded already
+     */
     public class DownloadProcessedReceiver extends BroadcastReceiver {
         public static final String ACTION_RESP = "DlProcessedReciver";
 

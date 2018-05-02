@@ -16,6 +16,9 @@ import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.database.AddLocalT
  * Created by Tomme on 22.04.2018.
  */
 
+/**
+ * Service that download the tests.
+ */
 public class DownloadTestService extends JobIntentService{
     static final int JOB_ID = 1000;
     private static final String TAG = "DlAndPocessTestService";
@@ -28,6 +31,10 @@ public class DownloadTestService extends JobIntentService{
         enqueueWork(context, DownloadTestService.class, JOB_ID, work);
     }
 
+    /**
+     * Process the the work that has been enqueued for this service
+     * @param intent
+     */
     @Override
     protected void onHandleWork(@NonNull Intent intent) {
         TestInfo testInfo = intent.getParcelableExtra(TestInfo.EXTRA);
@@ -38,6 +45,11 @@ public class DownloadTestService extends JobIntentService{
         new AddLocalTest(getApplicationContext()).execute(testInfo);
     }
 
+    /**
+     * This method downloads the desired test.
+     * @param testInfo
+     * @return
+     */
     private long downloadZip(TestInfo testInfo) {
         Uri uri = Uri.parse(testInfo.getResourceUrl());
 

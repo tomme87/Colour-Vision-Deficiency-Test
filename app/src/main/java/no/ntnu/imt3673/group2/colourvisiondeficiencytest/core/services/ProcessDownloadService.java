@@ -43,6 +43,10 @@ public class ProcessDownloadService extends JobIntentService implements GetLocal
         enqueueWork(context, ProcessDownloadService.class, JOB_ID, work);
     }
 
+    /**
+     * Process the the work that has been enqueued for this service
+     * @param intent
+     */
     @Override
     protected void onHandleWork(@NonNull Intent intent) {
         long downloadId = intent.getLongExtra(DownloadCompleteReceiver.EXTRA_ID, 0);
