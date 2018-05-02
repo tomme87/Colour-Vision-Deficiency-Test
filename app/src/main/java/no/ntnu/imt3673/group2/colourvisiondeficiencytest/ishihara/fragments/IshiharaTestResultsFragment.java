@@ -37,6 +37,7 @@ public class IshiharaTestResultsFragment extends Fragment {
 
     Button btnSend;
     Button btnExit;
+    TextView tvTitle;
     TextView tvResults;
 
     RequestQueue queue;
@@ -72,6 +73,7 @@ public class IshiharaTestResultsFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         this.btnSend = view.findViewById(R.id.btn_send_and_exit);
         this.btnExit = view.findViewById(R.id.btn_exit);
+        this.tvTitle = view.findViewById(R.id.tv_test_result_title);
         this.tvResults = view.findViewById(R.id.tv_result_summary);
 
         this.btnSend.setOnClickListener(new View.OnClickListener() {
@@ -90,6 +92,8 @@ public class IshiharaTestResultsFragment extends Fragment {
             }
         });
 
+        String titleString = testInfo.getName() + " " + getResources().getString(R.string.tv_test_result_title_stub);
+        this.tvTitle.setText(titleString);
         this.tvResults.setText(formatResults());
 
         super.onViewCreated(view, savedInstanceState);
