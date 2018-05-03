@@ -1,0 +1,46 @@
+[
+ {
+  "id":1,
+  "name":"Ishihara",
+  "description":"The first variant available of the Ishihara test for testing for Colour Vision Deficiency",
+  "resourceUrl":"http://folk.ntnu.no/tomaszmr/md/T1.zip",
+  "resultsUrl":null,
+  "type":"Ishihara",
+  "version":1,
+  "created":null,
+  "firstPlate":1
+ },
+ {
+  "id":2,
+  "name":"Ishihara 2",
+  "description":"Ishihara Test2. This test will test the users colour vision according to the Ishihara test created in the early 1900s",
+  "resourceUrl":"http://folk.ntnu.no/tomaszmr/md/T1.zip",
+  "resultsUrl":null,
+  "type":"Ishihara",
+  "version":2,
+  "created":null,
+  "firstPlate":1
+ },
+  {
+  "id":3,
+  "name":"Ishihara 3",
+  "description":"Ishihara Test3: Tests for CVDs with the Ishihara pseudo isochromatic plates containing numbers(no figures)",
+  "resourceUrl":"http://folk.ntnu.no/tomaszmr/md/T1.zip",
+  "resultsUrl":null,
+  "type":"Ishihara",
+  "version":3,
+  "created":null,
+  "firstPlate":1
+ },
+   {
+  "id":4,
+  "name":"Ishihara 4",
+  "description":"The fourth variant of the Ishihara test available as of 2 May 2018. Content identical to the other 3",
+  "resourceUrl":"http://folk.ntnu.no/tomaszmr/md/T1.zip",
+  "resultsUrl":null,
+  "type":"Ishihara",
+  "version":4,
+  "created":null,
+  "firstPlate":1
+ }
+]
