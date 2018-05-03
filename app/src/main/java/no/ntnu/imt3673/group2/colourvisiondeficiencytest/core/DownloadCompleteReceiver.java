@@ -7,12 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.services.ProcessDownloadService;
-
-/**
- * Created by Tomme on 22.04.2018.
- */
-
-
 /**
  * Listen to the Download Manager in order to know when a file  has been downloaded.
  */

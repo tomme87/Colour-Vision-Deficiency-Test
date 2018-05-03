@@ -27,8 +27,6 @@ public class TestWelcomeFragment extends Fragment {
 
     private TestInfo testInfo;
 
-    private OnGetActivityDataListener callback;
-
     public TestWelcomeFragment() {
         // Required empty public constructor
     }
@@ -38,8 +36,9 @@ public class TestWelcomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        OnGetActivityDataListener callback;
         try {
-            this.callback = (OnGetActivityDataListener) getActivity();
+            callback = (OnGetActivityDataListener) getActivity();
         } catch (ClassCastException e) {
             throw new ClassCastException(getActivity().toString()
                     + " must implement OnGetActivityDataListener");
@@ -49,7 +48,7 @@ public class TestWelcomeFragment extends Fragment {
 
         getActivity().setTitle(R.string.app_name_welcome_fragment);
 
-        this.testInfo = this.callback.getCurrentTestInfo();
+        this.testInfo = callback.getCurrentTestInfo();
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_test_welcome, container, false);

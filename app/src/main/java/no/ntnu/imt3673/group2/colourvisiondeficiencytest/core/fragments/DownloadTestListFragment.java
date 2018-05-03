@@ -142,7 +142,7 @@ public class DownloadTestListFragment extends Fragment {
      * @param response Array with test info objects.
      * @return Array with test info objects.
      */
-    public TestInfo[] updateAvailableTestList(TestInfo[] response) {
+    private TestInfo[] updateAvailableTestList(TestInfo[] response) {
         //Get Local Tests from DB
         List<TestInfo> localTestsList = this.callback.getLocalTestInfos();
 

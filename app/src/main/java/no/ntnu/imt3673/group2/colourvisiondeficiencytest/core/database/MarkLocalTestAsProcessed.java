@@ -8,10 +8,6 @@ import java.lang.ref.WeakReference;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
 
 /**
- * Created by Tomme on 23.04.2018.
- */
-
-/**
  * AsyncTask that marks  in Db the test that are already downloaded.
  */
 public class MarkLocalTestAsProcessed extends AsyncTask<TestInfo, Void, TestInfo> {

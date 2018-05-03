@@ -25,12 +25,8 @@ import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.database.GetLocalT
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.database.MarkLocalTestAsProcessed;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.fragments.LocalTestListFragment;
 
-/**
- * Created by Tomme on 22.04.2018.
- */
-
 public class ProcessDownloadService extends JobIntentService implements GetLocalTestByDownloadId.PostExecuteListener, MarkLocalTestAsProcessed.PostExecuteListener {
-    static final int JOB_ID = 1001;
+    private static final int JOB_ID = 1001;
     private static final String TAG = "ProcessDlService";
 
 
@@ -100,7 +96,7 @@ public class ProcessDownloadService extends JobIntentService implements GetLocal
      * @param targetDirectory where to unzip
      * @throws IOException
      */
-    public static void unzip(File zipFile, File targetDirectory) throws IOException {
+    private static void unzip(File zipFile, File targetDirectory) throws IOException {
         Log.d(TAG, "Output dir: " + targetDirectory.getAbsolutePath());
         try (ZipInputStream zis = new ZipInputStream(
                 new BufferedInputStream(new FileInputStream(zipFile)))) {
@@ -115,12 +111,9 @@ public class ProcessDownloadService extends JobIntentService implements GetLocal
                             dir.getAbsolutePath());
                 if (ze.isDirectory())
                     continue;
-                FileOutputStream fout = new FileOutputStream(file);
-                try {
+                try (FileOutputStream fout = new FileOutputStream(file)) {
                     while ((count = zis.read(buffer)) != -1)
                         fout.write(buffer, 0, count);
-                } finally {
-                    fout.close();
                 }
             }
         }

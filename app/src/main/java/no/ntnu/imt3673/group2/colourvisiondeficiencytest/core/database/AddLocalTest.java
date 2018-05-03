@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteConstraintException;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
@@ -15,11 +16,13 @@ import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
 public class AddLocalTest extends AsyncTask<TestInfo,Void,List<TestInfo>> {
 
     private static final String TAG = "AddLocalTest";
-    private final Context appContext;
+    private final WeakReference<Context> weakContext;
+    //private final Context appContext;
 
     // passing application context from service accessing db
     public AddLocalTest(Context appContext) {
-        this.appContext = appContext;
+        this.weakContext = new WeakReference<>(appContext);
+        //this.appContext = appContext;
     }
 
     /**
@@ -29,7 +32,12 @@ public class AddLocalTest extends AsyncTask<TestInfo,Void,List<TestInfo>> {
      */
     @Override
     protected List<TestInfo> doInBackground(TestInfo... testInfos) {
-        TestInfoDAO testInfoDAO = AppDatabase.getAppDatabase(this.appContext).testInfoDAO();
+        Context context = weakContext.get();
+        if (context == null) {
+            // context is no longer valid, don't do anything!
+            return null;
+        }
+        TestInfoDAO testInfoDAO = AppDatabase.getAppDatabase(context).testInfoDAO();
         for (TestInfo testInfo: testInfos) {
             try {
                 testInfoDAO.insert(testInfo);

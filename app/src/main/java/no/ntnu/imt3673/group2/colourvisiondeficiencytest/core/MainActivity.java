@@ -23,8 +23,7 @@ public class MainActivity extends AppCompatActivity implements OnGetActivityData
 
     private DownloadCompleteReceiver downloadCompleteReceiver;
 
-    TestInfo currentTestInfo; // TODO I don't think the use of this variable is good. look at Parcelable instead...?
-
+    private TestInfo currentTestInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

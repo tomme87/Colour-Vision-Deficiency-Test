@@ -29,18 +29,18 @@ import no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara.OnGetActivityD
 public class IshiharaTestFragment extends Fragment {
     private static final String TAG = "IshiharaTestFragment";
     private static final int TIMER_MAX = 5000;
-    IshiharaPlate plate;
-    TestInfo testInfo;
+    private IshiharaPlate plate;
+    private TestInfo testInfo;
 
-    ImageView imageView;
-    Button button;
-    EditText editText;
+    private ImageView imageView;
+    private Button button;
+    private EditText editText;
 
-    ProgressBar progressBar;
+    private ProgressBar progressBar;
 
-    CountDownTimer timer;
+    private CountDownTimer timer;
 
-    OnGetActivityDataListener callback;
+    private OnGetActivityDataListener callback;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
