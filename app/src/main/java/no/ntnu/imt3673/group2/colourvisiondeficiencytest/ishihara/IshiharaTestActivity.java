@@ -38,7 +38,7 @@ public class IshiharaTestActivity extends AppCompatActivity implements OnGetActi
     }
 
     /**
-     * We stop the test if it is abrupted. 
+     * We stop the test if it is abrupted.
      */
     @Override
     protected void onPause() {

@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -39,6 +40,8 @@ public class DownloadTestListFragment extends Fragment {
 
     private static final String TAG = "DlTestListFrag";
     private TestListAdapter testListAdapter;
+
+    ProgressBar pbLoadingDlList;
 
     private GsonGetRequest<TestInfo[]> request;
     private RequestQueue queue;
@@ -73,11 +76,13 @@ public class DownloadTestListFragment extends Fragment {
             public void onResponse(TestInfo[] response) {
                 Log.d(TAG, "Got response! " + response.length);
                 testListAdapter.setTestInfos(updateAvailableTestList(response));
+                pbLoadingDlList.setVisibility(View.GONE);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d(TAG, "Error downloading list: " + error.getMessage());
+                pbLoadingDlList.setVisibility(View.GONE);
             }
         });
 
@@ -88,6 +93,9 @@ public class DownloadTestListFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        pbLoadingDlList = view.findViewById(R.id.pb_loading_dl_list);
+        pbLoadingDlList.setVisibility(View.GONE);
+
         RecyclerView recyclerView = view.findViewById(R.id.rv_download_test_list);
         this.testListAdapter = new TestListAdapter(getContext(), callback.getDownloadableTestInfos());
 
@@ -115,6 +123,7 @@ public class DownloadTestListFragment extends Fragment {
      * Fetchs a new test list from the server
      */
     private void getNewList() {
+        pbLoadingDlList.setVisibility(View.VISIBLE);
         this.queue.add(this.request);
     }
 

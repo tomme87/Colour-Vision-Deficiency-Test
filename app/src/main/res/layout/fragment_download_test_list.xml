@@ -1,9 +1,17 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="#FFFFFF"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.fragments.DownloadTestListFragment">
+
+    <ProgressBar
+        android:id="@+id/pb_loading_dl_list"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:indeterminateOnly="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_download_test_list"
@@ -11,4 +19,4 @@
         android:layout_height="match_parent"
         android:scrollbars="vertical" />
 
-</FrameLayout>
+</LinearLayout>
