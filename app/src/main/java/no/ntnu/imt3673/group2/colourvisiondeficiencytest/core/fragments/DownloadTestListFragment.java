@@ -179,7 +179,7 @@ public class DownloadTestListFragment extends Fragment {
      */
     private class RecyclerTouchListener extends RecyclerView.SimpleOnItemTouchListener {
 
-        private GestureDetector gestureDetector;
+        private final GestureDetector gestureDetector;
 
         RecyclerTouchListener(Context context) {
             this.gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {

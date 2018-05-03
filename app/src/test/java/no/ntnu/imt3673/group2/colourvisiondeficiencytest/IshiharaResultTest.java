@@ -177,7 +177,7 @@ public class IshiharaResultTest {
             "  \"extra\":true    \n" +
             " }\n" +
             "]";
-    private static List<IshiharaPlate> ishiharaPlates;
+    private static final List<IshiharaPlate> ishiharaPlates;
     private static final IshiharaThreshold ishiharaThreshold = new IshiharaThreshold();
 
     /**

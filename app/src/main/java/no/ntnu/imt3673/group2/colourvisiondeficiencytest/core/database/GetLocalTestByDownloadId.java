@@ -14,7 +14,7 @@ import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
 public class GetLocalTestByDownloadId extends AsyncTask<Long, Void, TestInfo> {
     //private Context context;
     private final WeakReference<Context> weakContext;
-    private PostExecuteListener postExecuteListener;
+    private final PostExecuteListener postExecuteListener;
 
     /**
      * Passing application context from service accessing db

@@ -47,7 +47,7 @@ public class TestWelcomeFragment extends Fragment {
 
         this.testActivityClassFactory = new TestActivityClassFactory();
 
-        getActivity().setTitle(R.string.app_name_info_fragment);
+        getActivity().setTitle(R.string.app_name_welcome_fragment);
 
         this.testInfo = this.callback.getCurrentTestInfo();
 

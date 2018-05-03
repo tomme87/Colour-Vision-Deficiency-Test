@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -22,7 +21,7 @@ import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
 
 public class TestListAdapter extends RecyclerView.Adapter<TestListAdapter.TestListViewHolder> {
     private final LayoutInflater inflater;
-    private List<TestInfo> testInfos;
+    private final List<TestInfo> testInfos;
 
     public TestListAdapter(Context context, List<TestInfo> testInfos) {
         this.inflater = LayoutInflater.from(context);
@@ -66,9 +65,9 @@ public class TestListAdapter extends RecyclerView.Adapter<TestListAdapter.TestLi
 
     static class TestListViewHolder extends RecyclerView.ViewHolder {
 
-        TextView name;
-        TextView type;
-        ImageView icon;
+        final TextView name;
+        final TextView type;
+        final ImageView icon;
 
 
         public TestListViewHolder(View itemView) {

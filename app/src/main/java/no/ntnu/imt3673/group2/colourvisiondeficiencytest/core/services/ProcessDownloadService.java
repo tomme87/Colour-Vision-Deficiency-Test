@@ -15,12 +15,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.DownloadCompleteReceiver;
-import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.MainActivity;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.Test;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.database.GetLocalTestByDownloadId;
@@ -104,9 +102,8 @@ public class ProcessDownloadService extends JobIntentService implements GetLocal
      */
     public static void unzip(File zipFile, File targetDirectory) throws IOException {
         Log.d(TAG, "Output dir: " + targetDirectory.getAbsolutePath());
-        ZipInputStream zis = new ZipInputStream(
-                new BufferedInputStream(new FileInputStream(zipFile)));
-        try {
+        try (ZipInputStream zis = new ZipInputStream(
+                new BufferedInputStream(new FileInputStream(zipFile)))) {
             ZipEntry ze;
             int count;
             byte[] buffer = new byte[8192];
@@ -126,8 +123,6 @@ public class ProcessDownloadService extends JobIntentService implements GetLocal
                     fout.close();
                 }
             }
-        } finally {
-            zis.close();
         }
     }
 }

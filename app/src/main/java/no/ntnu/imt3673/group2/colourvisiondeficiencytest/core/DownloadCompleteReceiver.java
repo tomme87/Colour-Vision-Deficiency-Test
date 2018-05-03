@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.database.GetLocalTestByDownloadId;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.services.ProcessDownloadService;
 
 /**
@@ -23,6 +22,9 @@ public class DownloadCompleteReceiver extends BroadcastReceiver {
         }
 
         Bundle extras = intent.getExtras();
+        if(extras == null) {
+            return;
+        }
 
         Long downloadId = extras.getLong(DownloadManager.EXTRA_DOWNLOAD_ID);
 

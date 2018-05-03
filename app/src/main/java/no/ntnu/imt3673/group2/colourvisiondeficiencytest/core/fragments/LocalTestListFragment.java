@@ -134,7 +134,7 @@ public class LocalTestListFragment extends Fragment {
      * Handles clicks on the test local test list
      */
     private class RecyclerTouchListener extends RecyclerView.SimpleOnItemTouchListener {
-        private GestureDetector gestureDetector;
+        private final GestureDetector gestureDetector;
 
         RecyclerTouchListener(Context context) {
             this.gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {

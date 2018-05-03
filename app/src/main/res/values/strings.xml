@@ -57,5 +57,7 @@
     <string name="btn_open_test">Open test</string>
 
     <string name="iv_test_icon_string">Test thumb</string>
+    
+    <string name="error_unable_to_download">Unable to download file.</string>
 
 </resources>

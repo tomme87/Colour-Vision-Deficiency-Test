@@ -14,7 +14,7 @@ import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
 public class DeleteLocalTest extends AsyncTask <TestInfo, Void, List<TestInfo>> {
 
     private static final String TAG = "DeleteLocalTest";
-    private Context appContext;
+    private final Context appContext;
 
     // passing application context from service accessing db
     public DeleteLocalTest(Context appContext) {

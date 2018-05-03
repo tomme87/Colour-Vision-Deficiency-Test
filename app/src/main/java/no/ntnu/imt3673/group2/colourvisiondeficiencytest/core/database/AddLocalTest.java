@@ -15,7 +15,7 @@ import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
 public class AddLocalTest extends AsyncTask<TestInfo,Void,List<TestInfo>> {
 
     private static final String TAG = "AddLocalTest";
-    private Context appContext;
+    private final Context appContext;
 
     // passing application context from service accessing db
     public AddLocalTest(Context appContext) {

@@ -11,7 +11,7 @@ import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
  * AsyncTask that fetches information about locally stored tests
  */
 public class GetAllLocalTests extends AsyncTask <Void, Void, List<TestInfo>> {
-    Context appContext;
+    final Context appContext;
 
     // passing application context from service accessing db
     public GetAllLocalTests(Context appContext) {

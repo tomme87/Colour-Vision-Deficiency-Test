@@ -14,9 +14,9 @@ import java.io.FileReader;
  * Class creates the IshiaraThreshold object from thresholds.json
  */
 
-public class CreateThresholdObject extends AsyncTask<File, Void, IshiharaThreshold> {
+class CreateThresholdObject extends AsyncTask<File, Void, IshiharaThreshold> {
     private static final String TAG = "CreateThresholdObject";
-    private OnTaskDone done;
+    private final OnTaskDone done;
 
     public interface OnTaskDone {
         void setThreshold(IshiharaThreshold threshold);

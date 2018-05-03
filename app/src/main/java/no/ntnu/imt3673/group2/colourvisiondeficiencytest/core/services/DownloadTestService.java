@@ -8,13 +8,11 @@ import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v4.app.JobIntentService;
 import android.util.Log;
+import android.widget.Toast;
 
+import no.ntnu.imt3673.group2.colourvisiondeficiencytest.R;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.database.AddLocalTest;
-
-/**
- * Created by Tomme on 22.04.2018.
- */
 
 /**
  * Service that download the tests.
@@ -41,6 +39,11 @@ public class DownloadTestService extends JobIntentService{
         Log.d(TAG, "Testinfo: " + testInfo.getName());
 
         long downloadId = this.downloadZip(testInfo);
+        if(downloadId == -1) {
+            Toast.makeText(getApplicationContext(), R.string.error_unable_to_download, Toast.LENGTH_LONG).show();
+            return;
+        }
+
         testInfo.setDownloadId(downloadId);
         new AddLocalTest(getApplicationContext()).execute(testInfo);
     }
@@ -54,6 +57,9 @@ public class DownloadTestService extends JobIntentService{
         Uri uri = Uri.parse(testInfo.getResourceUrl());
 
         DownloadManager downloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
+        if(downloadManager == null) {
+            return -1;
+        }
         DownloadManager.Request request = new DownloadManager.Request(uri);
         request.setTitle(testInfo.getName());
         request.setDescription(DL_DESCRIPTION);
