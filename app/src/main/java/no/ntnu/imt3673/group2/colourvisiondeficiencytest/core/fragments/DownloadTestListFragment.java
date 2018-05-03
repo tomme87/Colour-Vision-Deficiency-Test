@@ -41,7 +41,7 @@ public class DownloadTestListFragment extends Fragment {
     private static final String TAG = "DlTestListFrag";
     private TestListAdapter testListAdapter;
 
-    ProgressBar pbLoadingDlList;
+    private ProgressBar pbLoadingDlList;
 
     private GsonGetRequest<TestInfo[]> request;
     private RequestQueue queue;

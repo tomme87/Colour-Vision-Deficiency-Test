@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,8 @@ import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.services.DownloadT
 public class DownloadInfoFragment extends Fragment {
     private static final String TAG = "DlInfoFrag";
     private TestInfo testInfo;
+
+    private ProgressBar pbLoadingDlTest;
 
     //private MainActivity mainActivity;
 
@@ -79,6 +82,7 @@ public class DownloadInfoFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        this.pbLoadingDlTest = view.findViewById(R.id.pb_loading_dl_test);
         this.btnDownload = view.findViewById(R.id.btn_download);
         this.btnDownload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,6 +118,7 @@ public class DownloadInfoFragment extends Fragment {
     public void onBtnDownload(View view) {
         Log.d(TAG, "Downloading id: " + testInfo.getId());
         btnDownload.setEnabled(false);
+        pbLoadingDlTest.setVisibility(View.VISIBLE);
 
         for (TestInfo testInfoCheck : callback.getLocalTestInfos()) {
             if (testInfoCheck.getId().equals(testInfo.getId())) {
@@ -138,7 +143,7 @@ public class DownloadInfoFragment extends Fragment {
         public void onReceive(Context context, Intent intent) {
             Log.d(TAG, "Processed done received");
             btnRunTest.setEnabled(true);
-
+            pbLoadingDlTest.setVisibility(View.GONE);
         }
     }
 
