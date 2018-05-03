@@ -22,9 +22,9 @@ public class IshiharaTestActivity extends AppCompatActivity implements OnGetActi
     private TestInfo testInfo;
     private ResultSet<IshiharaResult> results;
 
-    IshiharaThreshold ishiharaThreshold;
+    private IshiharaThreshold ishiharaThreshold;
 
-    IshiharaPlate currentPlate;
+    private IshiharaPlate currentPlate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +46,7 @@ public class IshiharaTestActivity extends AppCompatActivity implements OnGetActi
         finish();
     }
 
-    public void runIshiharaTestFragment(int i) {
+    private void runIshiharaTestFragment(int i) {
         Log.d(TAG, "Size before: " + mTest.getPlates().size());
         this.currentPlate = mTest.getPlates().remove(i); // Get and remove.
         Log.d(TAG, "Size after: " + mTest.getPlates().size());
@@ -58,7 +58,7 @@ public class IshiharaTestActivity extends AppCompatActivity implements OnGetActi
                 .commit();
     }
 
-    public void runFirstPlate() {
+    private void runFirstPlate() {
         initResultSet();
         Integer firstPlate = testInfo.getFirstPlate();
         if (firstPlate != null) {
@@ -80,7 +80,7 @@ public class IshiharaTestActivity extends AppCompatActivity implements OnGetActi
         this.results.setTime(new Date());
     }
 
-    public void runRandomPlate() {
+    private void runRandomPlate() {
         int size = mTest.getPlates().size();
         if (size == 0) {
             Log.d(TAG, "No more plates");

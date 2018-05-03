@@ -25,9 +25,6 @@ public interface TestInfoDAO {
     void setProcessedById(String id);
 
     @Insert
-    void insertAll(List<TestInfo> tests);
-
-    @Insert
     void insert(TestInfo testInfo);
 
     @Delete

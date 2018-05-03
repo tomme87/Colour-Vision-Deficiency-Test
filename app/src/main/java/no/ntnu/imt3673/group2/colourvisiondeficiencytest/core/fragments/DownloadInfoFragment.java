@@ -40,7 +40,7 @@ public class DownloadInfoFragment extends Fragment {
 
     private DownloadProcessedReceiver downloadProcessedReceiver;
 
-    OnGetActivityDataListener callback;
+    private OnGetActivityDataListener callback;
 
     public DownloadInfoFragment() {
         // Required empty public constructor

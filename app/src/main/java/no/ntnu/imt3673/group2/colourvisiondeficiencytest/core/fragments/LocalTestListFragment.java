@@ -104,7 +104,7 @@ public class LocalTestListFragment extends Fragment {
     /**
      * Update the list with the test that have been already downloaded.
      */
-    public void updateLocalList() {
+    private void updateLocalList() {
         //Get Local Tests from DB
         new GetAllLocalTests(getContext()) {
             @Override

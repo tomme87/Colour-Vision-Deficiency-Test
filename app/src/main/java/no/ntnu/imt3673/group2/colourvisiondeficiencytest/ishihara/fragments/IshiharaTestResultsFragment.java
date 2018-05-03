@@ -18,6 +18,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.R;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.GsonPostRequest;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
@@ -30,16 +33,16 @@ import no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara.OnGetActivityD
 public class IshiharaTestResultsFragment extends Fragment {
 
     private static final String TAG = "IshiharaTestResults";
-    TestInfo testInfo;
+    private TestInfo testInfo;
 
-    Button btnSend;
-    Button btnExit;
-    TextView tvTitle;
-    TextView tvResults;
+    private Button btnSend;
+    private Button btnExit;
+    private TextView tvTitle;
+    private TextView tvResults;
 
-    RequestQueue queue;
+    private RequestQueue queue;
 
-    OnGetActivityDataListener callback;
+    private OnGetActivityDataListener callback;
 
 
     public IshiharaTestResultsFragment() {
@@ -72,6 +75,14 @@ public class IshiharaTestResultsFragment extends Fragment {
         this.btnExit = view.findViewById(R.id.btn_exit);
         this.tvTitle = view.findViewById(R.id.tv_test_result_title);
         this.tvResults = view.findViewById(R.id.tv_result_summary);
+
+        try {
+            new URL(this.testInfo.getResultsUrl());
+        } catch (MalformedURLException e) {
+            Log.d(TAG, "Missing result server URL, disabling SEND button. Error: " + e.getMessage());
+            this.btnSend.setEnabled(false);
+        }
+
 
         this.btnSend.setOnClickListener(new View.OnClickListener() {
             @Override

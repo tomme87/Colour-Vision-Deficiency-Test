@@ -18,7 +18,7 @@ import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.database.AddLocalT
  * Service that download the tests.
  */
 public class DownloadTestService extends JobIntentService{
-    static final int JOB_ID = 1000;
+    private static final int JOB_ID = 1000;
     private static final String TAG = "DlAndPocessTestService";
     private static final String DL_DESCRIPTION = "Downloading resources";
 
