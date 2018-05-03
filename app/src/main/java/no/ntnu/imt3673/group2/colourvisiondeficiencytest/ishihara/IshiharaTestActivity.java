@@ -37,6 +37,14 @@ public class IshiharaTestActivity extends AppCompatActivity implements OnGetActi
         new CreateTestObject(this.testInfo, this).execute(file);
     }
 
+    /**
+     * We stop the test if it is abrupted. 
+     */
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+    }
 
     public void runIshiharaTestFragment(int i) {
         Log.d(TAG, "Size before: " + mTest.getPlates().size());
