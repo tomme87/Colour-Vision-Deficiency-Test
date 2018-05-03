@@ -86,7 +86,7 @@ public class IshiharaTestFragment extends Fragment {
         this.progressBar = view.findViewById(R.id.pb_timer);
         this.progressBar.setMax(timeLimit);
 
-        timer = new CountDownTimer(TIMER_MAX, 100) {
+        timer = new CountDownTimer(timeLimit, 100) {
 
             @Override
             public void onTick(long l) {
