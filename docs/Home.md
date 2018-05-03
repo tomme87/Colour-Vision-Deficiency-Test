@@ -6,18 +6,18 @@ An application that can help to detect colour vision deficiency. The main goal i
 
 ## Ishihara test ##
 
-[How we interpret Ishihara test](https://github.com/tomme87/imt3673-project-wiki/blob/master/Ishihara%20test%20intrpretation.md)
+[How we interpret Ishihara test](https://github.com/tomme87/Colour-Vision-Deficiency-Test/blob/master/docs/Ishihara%20test%20intrpretation.md)
 
 (screenshot slides or app demo)
 
-[GUI proposal](https://github.com/tomme87/imt3673-project-wiki/blob/master/GUI.md)
+[GUI proposal](https://github.com/tomme87/Colour-Vision-Deficiency-Test/blob/master/docs/GUI.md)
 
 ## Data structures ##
-[External dependencies](https://github.com/tomme87/imt3673-project-wiki/blob/master/External%20dependencies.md)
+[External dependencies](https://github.com/tomme87/Colour-Vision-Deficiency-Test/blob/master/docs/External%20dependencies.md)
 
 (example .json and .zip files)
 
-[Data structure implementation](https://github.com/tomme87/imt3673-project-wiki/blob/master/Implementation.md)
+[Data structure implementation](https://github.com/tomme87/Colour-Vision-Deficiency-Test/blob/master/docs/Implementation.md)
 
 ## TODO list ##
-[Checklist](https://github.com/tomme87/imt3673-project-wiki/blob/master/checklist.md)
+[Checklist](https://github.com/tomme87/Colour-Vision-Deficiency-Test/blob/master/docs/checklist.md)
