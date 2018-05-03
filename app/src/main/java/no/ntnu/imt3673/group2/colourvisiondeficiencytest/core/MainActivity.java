@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements OnGetActivityData
 
     /**
      * Show the welcome screen for a test.
+     * @param testInfo Information of the test
      */
     public void startWelcomeFragment(TestInfo testInfo) {
         this.currentTestInfo = testInfo;
@@ -85,6 +86,11 @@ public class MainActivity extends AppCompatActivity implements OnGetActivityData
                 .commit();
     }
 
+    /**
+     * From this fragment it its possible to download a test.
+     * The fragment shows information about the test as well.
+     * @param testInfo Information of the test
+     */
     public void startDownloadInfoFragment(TestInfo testInfo) {
         this.currentTestInfo = testInfo;
         Log.d(TAG, "List size: " + this.downloadableTestInfos.size());

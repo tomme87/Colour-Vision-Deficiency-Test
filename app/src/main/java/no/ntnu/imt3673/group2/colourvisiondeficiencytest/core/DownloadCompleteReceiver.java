@@ -12,6 +12,10 @@ import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.services.ProcessDo
  * Created by Tomme on 22.04.2018.
  */
 
+
+/**
+ * Listen to the Download Manager in order to know when a file  has been downloaded.
+ */
 public class DownloadCompleteReceiver extends BroadcastReceiver {
     public static final String EXTRA_ID = "DlCompleteId";
 

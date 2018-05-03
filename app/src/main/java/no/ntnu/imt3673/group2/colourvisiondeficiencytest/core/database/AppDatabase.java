@@ -32,6 +32,9 @@ public abstract class AppDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
+    /**
+     * Deletes a instance of the database.
+     */
     public static void destroyInstance() {
         INSTANCE = null;
     }
