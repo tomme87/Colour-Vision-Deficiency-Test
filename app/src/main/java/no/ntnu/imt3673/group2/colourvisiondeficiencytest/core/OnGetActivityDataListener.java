@@ -3,9 +3,8 @@ package no.ntnu.imt3673.group2.colourvisiondeficiencytest.core;
 import java.util.List;
 
 /**
- * Used for communication from MainActivity to Fragments.
+ *  Used for communication from MainActivity to Fragments.
  */
-
 public interface OnGetActivityDataListener {
     TestInfo getCurrentTestInfo();
 

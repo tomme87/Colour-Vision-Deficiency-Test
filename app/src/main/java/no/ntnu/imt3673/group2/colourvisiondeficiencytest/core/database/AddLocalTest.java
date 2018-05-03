@@ -24,7 +24,7 @@ public class AddLocalTest extends AsyncTask<TestInfo,Void,List<TestInfo>> {
 
     /**
      * insert all TestInfo objects
-     * @param testInfos
+     * @param testInfos Information of the tests objects.
      * @return newly updated TestInfo list
      */
     @Override
@@ -43,7 +43,7 @@ public class AddLocalTest extends AsyncTask<TestInfo,Void,List<TestInfo>> {
 
     /**
      * Updates list view when done fetching data from database
-     * @param testInfoList
+     * @param testInfoList List that contains information of the local tests.
      */
     @Override
     protected void onPostExecute(List<TestInfo> testInfoList) {

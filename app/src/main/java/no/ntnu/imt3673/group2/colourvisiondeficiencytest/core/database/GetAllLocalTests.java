@@ -30,7 +30,7 @@ public class GetAllLocalTests extends AsyncTask <Void, Void, List<TestInfo>> {
 
     /**
      * Updates list view when done fetching data from database
-     * @param testInfos
+     * @param testInfos List with information object about the downloaded (local) tests
      */
     @Override
     protected void onPostExecute(List<TestInfo> testInfos) {

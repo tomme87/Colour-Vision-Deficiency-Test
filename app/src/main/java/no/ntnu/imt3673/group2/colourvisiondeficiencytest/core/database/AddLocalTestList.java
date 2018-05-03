@@ -22,7 +22,7 @@ public class AddLocalTestList extends AsyncTask <List<TestInfo>, Void, List<Test
     /**
      * Adds a list of TestInfo objects to database
      * @param lists
-     * @return updated list of lcal tests
+     * @return updated list of local tests
      */
     @Override
     protected List<TestInfo> doInBackground(List<TestInfo>[] lists) {
