@@ -9,10 +9,8 @@
     <string name="ishihara_test_plate_input">What you see.</string>
     <string name="ishihara_test_next_btn">Next</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-
     <!-- Change this url to the json desired url for the json response of available tests -->
-    <string name="url_test_list">http://folk.ntnu.no/tomaszmr/md/TestList.json</string>
+    <string name="url_test_list">https://raw.githubusercontent.com/tomme87/Colour-Vision-Deficiency-Test/master/mock/TestList.json</string>
     <string name="btn_download_text">Download</string>
 
     <string name="error_already_downloading">Already downloading this test</string>
