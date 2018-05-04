@@ -14,9 +14,9 @@ public class TestActivityClassFactory {
     }
 
     /**
-     * Creates
-     * @param type
-     * @return
+     * Return the kind of test that will be created.
+     * @param type of test.
+     * @return The kind of test that will be created.
      */
     public Class<?> getActivity(String type) {
         switch (type) {

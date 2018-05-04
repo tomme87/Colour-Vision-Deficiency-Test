@@ -39,7 +39,7 @@ public class ProcessDownloadService extends JobIntentService implements GetLocal
 
     /**
      * Process the the work that has been enqueued for this service
-     * @param intent
+     * @param intent Intent object.
      */
     @Override
     protected void onHandleWork(@NonNull Intent intent) {
@@ -94,7 +94,7 @@ public class ProcessDownloadService extends JobIntentService implements GetLocal
      *
      * @param zipFile File to unzip
      * @param targetDirectory where to unzip
-     * @throws IOException
+     * @throws IOException When unable to unzip file.
      */
     private static void unzip(File zipFile, File targetDirectory) throws IOException {
         Log.d(TAG, "Output dir: " + targetDirectory.getAbsolutePath());

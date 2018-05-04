@@ -18,8 +18,8 @@ public class GetLocalTestByDownloadId extends AsyncTask<Long, Void, TestInfo> {
 
     /**
      * Passing application context from service accessing db
-     * @param context
-     * @param postExecuteListener
+     * @param context Context of the application
+     * @param postExecuteListener Listener for completed process.
      */
     public GetLocalTestByDownloadId(Context context, PostExecuteListener postExecuteListener) {
         //this.context = context;
@@ -29,8 +29,8 @@ public class GetLocalTestByDownloadId extends AsyncTask<Long, Void, TestInfo> {
 
     /**
      * Gets form Db information of a test given its ID.Gets form Db information of a test given its ID.
-     * @param longs
-     * @return
+     * @param longs Download ID.
+     * @return TestInfo Object from local db.
      */
     @Override
     protected TestInfo doInBackground(Long... longs) {

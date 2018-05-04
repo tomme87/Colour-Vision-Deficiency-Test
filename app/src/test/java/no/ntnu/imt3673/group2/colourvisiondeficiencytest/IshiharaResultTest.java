@@ -180,9 +180,9 @@ public class IshiharaResultTest {
     private static final List<IshiharaPlate> ishiharaPlates;
     private static final IshiharaThreshold ishiharaThreshold = new IshiharaThreshold();
 
-    /**
-     * Generate the default values for this test.
-     */
+
+     //Generate the default values for this test.
+
     static {
         Gson gson = new Gson();
         final Type type = new TypeToken<List<IshiharaPlate>>() {

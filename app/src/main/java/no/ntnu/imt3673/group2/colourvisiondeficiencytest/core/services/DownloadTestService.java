@@ -31,7 +31,7 @@ public class DownloadTestService extends JobIntentService{
 
     /**
      * Process the the work that has been enqueued for this service
-     * @param intent
+     * @param intent Intent object.
      */
     @Override
     protected void onHandleWork(@NonNull Intent intent) {
@@ -50,8 +50,8 @@ public class DownloadTestService extends JobIntentService{
 
     /**
      * This method downloads the desired test.
-     * @param testInfo
-     * @return
+     * @param testInfo TestInfo Object
+     * @return Download ID. -1 if no download manager.
      */
     private long downloadZip(TestInfo testInfo) {
         Uri uri = Uri.parse(testInfo.getResourceUrl());

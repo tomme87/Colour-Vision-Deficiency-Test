@@ -26,6 +26,9 @@ import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara.IshiharaPlate;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara.OnGetActivityDataListener;
 
+/**
+ * Fragment that shows the plates of an Ishihara test
+ */
 public class IshiharaTestFragment extends Fragment {
     private static final String TAG = "IshiharaTestFragment";
     private static final int TIMER_MAX = 5000;

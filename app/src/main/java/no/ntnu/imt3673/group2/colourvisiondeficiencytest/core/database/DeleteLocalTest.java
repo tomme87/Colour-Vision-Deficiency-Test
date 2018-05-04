@@ -23,7 +23,7 @@ public class DeleteLocalTest extends AsyncTask <TestInfo, Void, List<TestInfo>> 
 
     /**
      * Deletes from database all given TestInfo entries
-     * @param testInfos
+     * @param testInfos Information about tests
      * @return current local tests list (after deleting)
      */
     @Override
@@ -37,8 +37,8 @@ public class DeleteLocalTest extends AsyncTask <TestInfo, Void, List<TestInfo>> 
     }
 
     /**
-     * Updates list view when done fetching data from database
-     * @param testInfoList
+     * Updates list view when done fetching data from database.
+     * @param testInfoList List with info about the local tests.
      */
     @Override
     protected void onPostExecute(List<TestInfo> testInfoList) {
