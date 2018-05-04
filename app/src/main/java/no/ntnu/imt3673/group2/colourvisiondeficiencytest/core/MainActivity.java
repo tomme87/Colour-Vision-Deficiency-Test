@@ -108,6 +108,7 @@ public class MainActivity extends AppCompatActivity implements OnGetActivityData
         return localTestInfos;
     }
 
+    
     public List<TestInfo> getDownloadableTestInfos() {
         return downloadableTestInfos;
     }

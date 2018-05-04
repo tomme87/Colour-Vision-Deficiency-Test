@@ -55,8 +55,7 @@ public class GetLocalTestByDownloadId extends AsyncTask<Long, Void, TestInfo> {
     }
 
     /**
-     *
-     *
+     *Updates list view when done fetching data from database     *
      */
     public interface PostExecuteListener {
         void onTestInfoFound(TestInfo testInfo);

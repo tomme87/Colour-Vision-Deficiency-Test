@@ -47,6 +47,7 @@ public class MarkLocalTestAsProcessed extends AsyncTask<TestInfo, Void, TestInfo
         return appDatabase.testInfoDAO().getById(id);
     }
 
+
     @Override
     protected void onPostExecute(TestInfo testInfo) {
         if(postExecuteListener != null && testInfo != null) {
