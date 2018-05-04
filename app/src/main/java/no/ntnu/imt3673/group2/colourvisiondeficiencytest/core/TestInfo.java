@@ -8,6 +8,9 @@ import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+/**
+ * Class that represents information for each test.
+ */
 @Entity (
         tableName = "local_tests"
 )
@@ -47,9 +50,26 @@ public class TestInfo implements Parcelable {
 
     private boolean processed = false;
 
+    /**
+     * Empty constructor.
+     */
     public TestInfo() {
     }
 
+    /**
+     * Constructor.
+     *
+     * @param id id of the test.
+     * @param name name of the test.
+     * @param description description of the test.
+     * @param resources URL where to fetch the zip file of the test.
+     * @param resultServer URL where the results will be posted to.
+     * @param firstPlate Indicates which plate (if any) will be shown in first when running the test.
+     * @param type Type of test.
+     * @param version Version of the est.
+     * @param downloadId Download Id given to thest.
+     * @param processed True if the test is processed (Downloaded, unzipped i.e. ready to use).
+     */
     public TestInfo(
             @NonNull String id,
             @Nullable String name,
@@ -74,95 +94,178 @@ public class TestInfo implements Parcelable {
         this.processed = processed;
     }
 
+    /**
+     * Gets the id of the test.
+     * @return the id of the test.
+     */
     @NonNull
     public String getId() {
         return id;
     }
 
+
+    /**
+     * Sets the id of the test.
+     * @param id the id of the test.
+     */
     public void setId(@NonNull String id) {
         this.id = id;
     }
 
+
+    /**
+     * Gets the name of the test.
+     * @return  the name of the test.
+     */
     @Nullable
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets the name of the test.
+     * @param name  the name of the test.
+     */
     public void setName(@Nullable String name) {
         this.name = name;
     }
 
+    /**
+     * Gets the description of the test.
+     * @return he description of the test.
+     */
     @Nullable
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Gets the description of the test.
+     * @param description the description of the test.
+     */
     public void setDescription(@Nullable String description) {
         this.description = description;
     }
 
+    /**
+     * Gets the URL where to fetch the zip file of the test.
+     * @return theURL where to fetch the zip file of the test.
+     */
     @NonNull
     public String getResourceUrl() {
         return resourceUrl;
     }
 
+    /**
+     * Sets the URL where to fetch the zip file of the test.
+     * @param resourceUrl the URL where to fetch the zip file of the test
+     */
     public void setResourceUrl(@NonNull String resourceUrl) {
         this.resourceUrl = resourceUrl;
     }
 
+    /**
+     * Gets the URL where the results will be posted to.
+     * @return the URL where the results will be posted to.
+     */
     @Nullable
     public String getResultsUrl() {
         return resultsUrl;
     }
 
+    /**
+     * Sets the URL where the results will be posted to.
+     * @param resultsUrl the URL where the results will be posted to.
+     */
     public void setResultsUrl(@Nullable String resultsUrl) {
         this.resultsUrl = resultsUrl;
     }
 
+    /**
+     * Gets  the first plate that will be shown when running the test.
+     * @return  The first plate that will be shown when running the test.
+     */
     @Nullable
     public Integer getFirstPlate() {
         return firstPlate;
     }
 
+    /**
+     * Sets  the first plate that will be shown when running the test.
+     * @param firstPlate the first plate that will be shown when running the test.
+     */
     public void setFirstPlate(@Nullable Integer firstPlate) {
         this.firstPlate = firstPlate;
     }
 
+    /**
+     * Gets the type of test.
+     * @return the type of test.
+     */
     @NonNull
     public String getType() {
         return type;
     }
 
+    /**
+     * Sets the type of test.
+     * @param type the type of test.
+     */
     public void setType(@NonNull String type) {
         this.type = type;
     }
 
+    /**
+     * Gets the version of the test.
+     * @return the version of the test.
+     */
     @Nullable
     public Integer getVersion() {
         return version;
     }
 
+    /**
+     * Sets the version of the test.
+     * @param version the version of the test.
+     */
     public void setVersion(Integer version) {
         this.version = version;
     }
 
+    /**
+     * Gets the Download Id of the test.
+     * @return the Download Id of the test.
+     */
     @Nullable
     public Long getDownloadId() {
         return downloadId;
     }
 
+    /**
+     * Sets the Download Id of the test.
+     * @param downloadId the Download Id of the test.
+     */
     public void setDownloadId(@Nullable Long downloadId) {
         this.downloadId = downloadId;
     }
 
+    /**
+     * Gets if the test is processed (Downloaded, unzipped i.e. ready to use).
+     * @return bool.
+     */
     public boolean isProcessed() {
         return processed;
     }
 
+    /**
+     * Sets if the test is processed (Downloaded, unzipped i.e. ready to use).
+     * @param processed bool.
+     */
     public void setProcessed(boolean processed) {
         this.processed = processed;
     }
 
+ 
     @Override
     public int describeContents() {
         return 0;

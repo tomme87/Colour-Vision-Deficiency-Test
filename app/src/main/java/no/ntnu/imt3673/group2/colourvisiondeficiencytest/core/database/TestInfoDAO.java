@@ -9,6 +9,9 @@ import java.util.List;
 
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
 
+/**
+ * DAO interface for TestInfo objects.
+ */
 @Dao
 public interface TestInfoDAO {
 

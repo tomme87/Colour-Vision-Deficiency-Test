@@ -18,7 +18,7 @@ import java.util.Map;
 /**
  * Converts Java objects to and from JSON
  *  From https://developer.android.com/training/volley/request-custom.html#java
- * @param <T>
+ * @param <T> Generic type that extends Volley.Request
  */
 public class GsonGetRequest<T> extends Request<T> {
     private final Gson gson = new Gson();

@@ -14,6 +14,9 @@ import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.fragments.Download
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.fragments.LocalTestListFragment;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.fragments.TestWelcomeFragment;
 
+/**
+ * Main activity of the application.
+ */
 public class MainActivity extends AppCompatActivity implements OnGetActivityDataListener {
     private static final String TAG = "MainActivity";
 

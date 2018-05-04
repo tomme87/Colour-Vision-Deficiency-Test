@@ -13,9 +13,9 @@ import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 /**
+ * Class used to create HTTP POST Request.
  * From https://github.com/Sottti/OkHttp-Volley-Gson/blob/master/app/src/main/java/com/sotti/okhttpvolleygson/data/GsonPostRequest.java
  */
-
 public class GsonPostRequest<T> extends JsonRequest<T> {
     private final Gson gson = new Gson();
     private final Class<T> clazz;
