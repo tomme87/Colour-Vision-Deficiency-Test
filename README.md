@@ -3,6 +3,8 @@
 This application is created for researchers to add tests for colour vision deficiency,
 which this application can download and present to a user which can test its colour vision.
 
+[Latest release can be found here](https://github.com/tomme87/Colour-Vision-Deficiency-Test/releases)
+
 This was created as student project in the cource imt3673 Mobile Development.
 Group members:
 * Manuel Bravo Garcia
