@@ -271,6 +271,11 @@ public class TestInfo implements Parcelable {
         return 0;
     }
 
+    /**
+     * How to write the parcel.
+     * @param parcel Parcel object
+     * @param i flag that is 0 or PARCELABLE_WRITE_RETURN_VALUE.
+     */
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(this.id);
@@ -285,6 +290,9 @@ public class TestInfo implements Parcelable {
         parcel.writeByte((byte) (this.processed ? 1 : 0));
     }
 
+    /**
+     * The creator needed for the Pracelable.
+     */
     public static final Parcelable.Creator<TestInfo> CREATOR = new Parcelable.Creator<TestInfo>() {
 
         @Override
