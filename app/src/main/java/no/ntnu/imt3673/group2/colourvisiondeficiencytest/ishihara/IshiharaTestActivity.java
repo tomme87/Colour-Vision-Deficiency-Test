@@ -14,6 +14,9 @@ import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara.fragments.IshiharaTestFragment;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara.fragments.IshiharaTestResultsFragment;
 
+/**
+ * An activity for running an Ishihara test
+ */
 public class IshiharaTestActivity extends AppCompatActivity implements OnGetActivityDataListener,
         CreateTestObject.OnTaskDone, CreateThresholdObject.OnTaskDone {
     private static final String TAG = "IshiharaTestActivity";
@@ -38,7 +41,8 @@ public class IshiharaTestActivity extends AppCompatActivity implements OnGetActi
     }
 
     /**
-     * We stop the test if it is abrupted.
+     * We stop the test if it is aborted. Not possible to countinue on resume.
+     * Run again from the begining - to avoid test environment change.
      */
     @Override
     protected void onPause() {
@@ -46,6 +50,10 @@ public class IshiharaTestActivity extends AppCompatActivity implements OnGetActi
         finish();
     }
 
+    /**
+     * Removes a plate from a set and loads a fragment to show it.
+     * @param i index of the plate in the current set of plates
+     */
     private void runIshiharaTestFragment(int i) {
         Log.d(TAG, "Size before: " + mTest.getPlates().size());
         this.currentPlate = mTest.getPlates().remove(i); // Get and remove.
@@ -58,6 +66,10 @@ public class IshiharaTestActivity extends AppCompatActivity implements OnGetActi
                 .commit();
     }
 
+    /**
+     * If the first/initial plate is defined in TestInfo object it is shown,
+     * if not or doesn't match id of any existing plate shows the random plate
+     */
     private void runFirstPlate() {
         initResultSet();
         Integer firstPlate = testInfo.getFirstPlate();
@@ -74,12 +86,19 @@ public class IshiharaTestActivity extends AppCompatActivity implements OnGetActi
         runRandomPlate();
     }
 
+    /**
+     * Initialize an object to store results for each plate.
+     */
     private void initResultSet() {
         this.results = new ResultSet<>();
         this.results.setTestId(this.testInfo.getId());
         this.results.setTime(new Date());
     }
 
+    /**
+     * If there are still any plates to show, takes a random one to show.
+     * If no more plates loads summary fragment
+     */
     private void runRandomPlate() {
         int size = mTest.getPlates().size();
         if (size == 0) {
@@ -92,6 +111,9 @@ public class IshiharaTestActivity extends AppCompatActivity implements OnGetActi
         runIshiharaTestFragment(random.nextInt(size));
     }
 
+    /**
+     * Loads a summary fragment
+     */
     private void runIshiharaTestSummary() {
         IshiharaTestResultsFragment fragment = new IshiharaTestResultsFragment();
         getSupportFragmentManager().beginTransaction()
@@ -140,6 +162,10 @@ public class IshiharaTestActivity extends AppCompatActivity implements OnGetActi
         return ishiharaThreshold;
     }
 
+    /**
+     * When a Test object is prepared runs the next task to prepare Threshold object
+     * @param test a Test object prepared by CreateTestObject async task
+     */
     @Override
     public void setTest(Test<IshiharaPlate> test) {
         this.mTest = test;
@@ -149,6 +175,10 @@ public class IshiharaTestActivity extends AppCompatActivity implements OnGetActi
         new CreateThresholdObject(this).execute(file);
     }
 
+    /**
+     * When an IshiharaThreshold object is prepared the first plate could be shown
+     * @param threshold an IshiharaThreshold object prepared by CreateThresholdObject async task
+     */
     @Override
     public void setThreshold(IshiharaThreshold threshold) {
         this.ishiharaThreshold = threshold;
