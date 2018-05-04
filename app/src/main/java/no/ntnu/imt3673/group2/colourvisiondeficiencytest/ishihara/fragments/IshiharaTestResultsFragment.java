@@ -29,6 +29,7 @@ import no.ntnu.imt3673.group2.colourvisiondeficiencytest.ishihara.OnGetActivityD
 
 /**
  * A simple {@link Fragment} subclass.
+ * Fragment that shows the results after har finished an Ishihara test.
  */
 public class IshiharaTestResultsFragment extends Fragment {
 
@@ -45,6 +46,9 @@ public class IshiharaTestResultsFragment extends Fragment {
     private OnGetActivityDataListener callback;
 
 
+    /**
+     * Empty Constructor.
+     */
     public IshiharaTestResultsFragment() {
         // Required empty public constructor
     }
@@ -107,6 +111,9 @@ public class IshiharaTestResultsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
+    /**
+     * Uploads the results of a test to a server.
+     */
     private void sendResultsAndFinish() {
         Gson gson = new Gson();
 
@@ -136,6 +143,10 @@ public class IshiharaTestResultsFragment extends Fragment {
 
     }
 
+    /**
+     * Gets the strings that explain the results of a test.
+     * @return  ID of the string that shows the results.
+     */
     private int formatResults() {
         int result = IshiharaCalculateResults.getResult(this.callback.getIshiharaThreshold(),
                 this.callback.getResultSet().getResults());

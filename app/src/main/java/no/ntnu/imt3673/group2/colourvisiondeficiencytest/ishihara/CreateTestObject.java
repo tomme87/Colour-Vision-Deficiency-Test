@@ -17,9 +17,8 @@ import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.Test;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
 
 /**
- * Class creates the Test object from plates.json
+ * AsynTask that creates the Test object from plates.json
  */
-
 class CreateTestObject extends AsyncTask<File, Void, Test<IshiharaPlate>> {
     private static final String TAG = "CreateTestObject";
     private final TestInfo testInfo;

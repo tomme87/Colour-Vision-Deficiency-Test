@@ -20,7 +20,7 @@ public class GetAllLocalTests extends AsyncTask <Void, Void, List<TestInfo>> {
 
     /**
      *
-     * @param voids
+     * @param voids Not used.
      * @return list of all local tests
      */
     @Override

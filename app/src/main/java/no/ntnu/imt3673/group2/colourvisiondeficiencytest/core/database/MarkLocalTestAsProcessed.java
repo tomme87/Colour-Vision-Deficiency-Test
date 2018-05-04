@@ -16,8 +16,8 @@ public class MarkLocalTestAsProcessed extends AsyncTask<TestInfo, Void, TestInfo
 
     /**
      * Passing application context from service accessing db
-     * @param context
-     * @param postExecuteListener
+     * @param context Context of the application
+     * @param postExecuteListener  Listener for completed process.
      */
     public MarkLocalTestAsProcessed(Context context, PostExecuteListener postExecuteListener) {
         //this.context = context;
@@ -28,8 +28,8 @@ public class MarkLocalTestAsProcessed extends AsyncTask<TestInfo, Void, TestInfo
     /**
      * Marks a test in DB as downloaded, given its ID
      *
-     * @param testInfos
-     * @return
+     * @param testInfos TestInfo objects
+     * @return TestInfo object recently marked as downloaded.
      */
     @Override
     protected TestInfo doInBackground(TestInfo... testInfos) {
@@ -54,6 +54,9 @@ public class MarkLocalTestAsProcessed extends AsyncTask<TestInfo, Void, TestInfo
         }
     }
 
+    /**
+     * Listener for completed process.
+     */
     public interface PostExecuteListener {
         void onProcessedMarked(TestInfo testInfo);
     }

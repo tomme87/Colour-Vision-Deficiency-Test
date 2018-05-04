@@ -20,7 +20,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
     /**
      * Used get an instance of database
-     * @param context
+     * @param context Current Context (state) of the application
      * @return singelton instance of AppDatabase
      */
     public static AppDatabase getAppDatabase(Context context) {

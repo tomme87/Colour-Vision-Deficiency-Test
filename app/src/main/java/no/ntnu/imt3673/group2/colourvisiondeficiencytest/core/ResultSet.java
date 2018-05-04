@@ -102,17 +102,17 @@ public class ResultSet <T extends Result>{
     }
 
     /**
-     * Adds result to set
-     * @param result
+     * Adds result to set.
+     * @param result Result extension to be added to set.
      */
     public void addResult (T result) {
         this.results.add(result);
     }
 
     /**
-     * adds or replaces if key exists
-     * @param key
-     * @param value
+     * Adds or replaces if key exists.
+     * @param key Key of the extra data.
+     * @param value Value of the extra data.
      */
     public void addExtraData (String key, Object value) {
         this.extraData.put(key,value);
