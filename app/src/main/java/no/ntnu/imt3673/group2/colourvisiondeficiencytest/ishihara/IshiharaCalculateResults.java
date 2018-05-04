@@ -5,7 +5,6 @@ import java.util.List;
 /**
  * Class to calculate Results of the test. finds if the user have normal colour vision or not.
  */
-
 public class IshiharaCalculateResults {
     public static final int NORMAL = 0;
     public static final int GENERAL_READ_GREEN = 1;
@@ -18,12 +17,17 @@ public class IshiharaCalculateResults {
     private static final int COUNTER_PROTAN = 2;
     private static final int COUNTR_TOTAL = 3;
 
-    //public static final int[] counters = {0,0,0,0};
-
     private IshiharaCalculateResults() {
         /* Empty constructor to prevent intialiation */
     }
 
+    /**
+     * Get the result from a Ishihara test.
+     *
+     * @param ishiharaThreshold the thresholds to use.
+     * @param results The list of results.
+     * @return int that is one of the constants; NORMAL, GENERAL_READ_GREEN, PROTAN, DEUTAN or UNCERTAIN.
+     */
     public static int getResult(IshiharaThreshold ishiharaThreshold, List<IshiharaResult> results) {
         int[] counters = calculate(results);
 
@@ -47,6 +51,12 @@ public class IshiharaCalculateResults {
         return UNCERTAIN;
     }
 
+    /**
+     * From the results, find out how many times each type is answered.
+     *
+     * @param results he list of results.
+     * @return array of ints with counters wehre each index represens at type.
+     */
     private static int[] calculate(final List<IshiharaResult> results) {
         final int[] counters = {0, 0, 0, 0};
         boolean matched;
@@ -62,10 +72,17 @@ public class IshiharaCalculateResults {
             }
         }
 
-        //runIshiharaTestSummary();
         return counters;
     }
 
+    /**
+     * Finds which counter to count, and returns true if somehting was counted.
+     *
+     * @param plate The plate to match against.
+     * @param answer The answer to match agains.
+     * @param counters array of counters to count.
+     * @return if something was counted or not.
+     */
     private static boolean isMatched(final IshiharaPlate plate, final Integer answer, final int[] counters) {
         if (answer == null) {
             return false;

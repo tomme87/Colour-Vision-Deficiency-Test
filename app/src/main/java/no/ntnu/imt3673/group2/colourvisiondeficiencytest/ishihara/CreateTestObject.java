@@ -24,15 +24,29 @@ class CreateTestObject extends AsyncTask<File, Void, Test<IshiharaPlate>> {
     private final TestInfo testInfo;
     private final OnTaskDone done;
 
+    /**
+     * Interface to use when a task is done.
+     */
     public interface OnTaskDone {
         void setTest(Test<IshiharaPlate> test);
     }
 
+    /**
+     * Constructor with data needed to create Test object.
+     *
+     * @param testInfo TestInfo object to be added to the Test object.
+     * @param done Listener to use after prcessing.
+     */
     CreateTestObject(TestInfo testInfo, OnTaskDone done) {
         this.testInfo = testInfo;
         this.done = done;
     }
 
+    /**
+     * Read the JSON file and marshall to list of IshiharaPlate, then add it to Test object.
+     * @param files the plates.json file
+     * @return Test object that contains plates and TestInfo.
+     */
     @Override
     protected Test<IshiharaPlate> doInBackground(File... files) {
         Gson gson = new Gson();

@@ -116,6 +116,9 @@ public class IshiharaTestFragment extends Fragment {
         Log.d(TAG, "Test fragment created : " + imageFile.getAbsolutePath() + " : " + imageFile.exists());
     }
 
+    /**
+     * Cancel the timer if this view is destroyed.
+     */
     @Override
     public void onDestroy() {
         super.onDestroy();

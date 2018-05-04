@@ -18,14 +18,26 @@ class CreateThresholdObject extends AsyncTask<File, Void, IshiharaThreshold> {
     private static final String TAG = "CreateThresholdObject";
     private final OnTaskDone done;
 
+    /**
+     * Interface to use when a task is done.
+     */
     public interface OnTaskDone {
         void setThreshold(IshiharaThreshold threshold);
     }
 
+    /**
+     * Constructor with data needed to create Threshold object object.
+     * @param done Listener to use after prcessing.
+     */
     CreateThresholdObject(OnTaskDone done) {
         this.done = done;
     }
 
+    /**
+     * Raad JSON file and marshall to IshiharaTHreshold object.
+     * @param files The thresholds.json file.
+     * @return IshiharaThreashold object marshalled from the JSON file.
+     */
     @Override
     protected IshiharaThreshold doInBackground(File... files) {
         Gson gson = new Gson();

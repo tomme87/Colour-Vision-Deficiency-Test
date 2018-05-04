@@ -14,22 +14,38 @@ import java.util.List;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.R;
 import no.ntnu.imt3673.group2.colourvisiondeficiencytest.core.TestInfo;
 
+/**
+ * Adapter for the local tests list and downloadable tests list.
+ */
 public class TestListAdapter extends RecyclerView.Adapter<TestListAdapter.TestListViewHolder> {
     private final LayoutInflater inflater;
     private final List<TestInfo> testInfos;
 
+    /**
+     *
+     * @param context the context to inflate from
+     * @param testInfos TestInfo list to use for this adapter elements.
+     */
     public TestListAdapter(Context context, List<TestInfo> testInfos) {
         this.inflater = LayoutInflater.from(context);
         this.testInfos = testInfos;
     }
 
+    /**
+     * Add new data to the testInfo object.
+     * @param testInfos array of TestInfo object to be added.
+     */
     public void setTestInfos(TestInfo[] testInfos) {
-        //this.testInfos = new ArrayList<>(Arrays.asList(testInfos));
         this.testInfos.clear();
         this.testInfos.addAll(Arrays.asList(testInfos));
         notifyDataSetChanged();
     }
 
+    /**
+     * Get TestInfo from the testInfos list.
+     * @param position at what position is the testInfo object.
+     * @return The requested TestInfo object.
+     */
     public TestInfo getTestInfo(int position) {
         return this.testInfos.get(position);
     }
@@ -58,6 +74,9 @@ public class TestListAdapter extends RecyclerView.Adapter<TestListAdapter.TestLi
         return testInfos.size();
     }
 
+    /**
+     * The holder for the View, which contains the name, type and icon for each element in the list.
+     */
     static class TestListViewHolder extends RecyclerView.ViewHolder {
 
         final TextView name;
