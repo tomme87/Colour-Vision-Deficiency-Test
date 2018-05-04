@@ -40,10 +40,12 @@ public class MainActivity extends AppCompatActivity implements OnGetActivityData
         this.startLocalListFragment();
     }
 
+    /**
+     * Unregister the receiver when this activity is destroyed.
+     */
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
         unregisterReceiver(this.downloadCompleteReceiver);
     }
 
@@ -59,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements OnGetActivityData
     /**
      * Show the list of downloadable tests.
      */
+    @Override
     public void startDownloadFragment() {
         getSupportFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new DownloadTestListFragment())
@@ -68,8 +71,9 @@ public class MainActivity extends AppCompatActivity implements OnGetActivityData
 
     /**
      * Show the welcome screen for a test.
-     * @param testInfo Information of the test
+     * @param testInfo Information about the test
      */
+    @Override
     public void startWelcomeFragment(TestInfo testInfo) {
         this.currentTestInfo = testInfo;
         Log.d(TAG, "List size: " + this.localTestInfos.size());
@@ -79,6 +83,10 @@ public class MainActivity extends AppCompatActivity implements OnGetActivityData
                 .commit();
     }
 
+    /**
+     * Show the welcome screen for a test without adding it to the stack back.
+     * @param testInfo Information about the test.
+     */
     @Override
     public void startWelcomeFragmentFromDownloadInfo(TestInfo testInfo) {
         this.currentTestInfo = testInfo;
@@ -93,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements OnGetActivityData
      * The fragment shows information about the test as well.
      * @param testInfo Information of the test
      */
+    @Override
     public void startDownloadInfoFragment(TestInfo testInfo) {
         this.currentTestInfo = testInfo;
         Log.d(TAG, "List size: " + this.downloadableTestInfos.size());
@@ -103,16 +112,28 @@ public class MainActivity extends AppCompatActivity implements OnGetActivityData
                 .commit();
     }
 
+    /**
+     * Get the list of local TestInfo objects.
+     * @return local list of TestInfo objects that we can use to conduct the test.
+     */
     @Override
     public List<TestInfo> getLocalTestInfos() {
         return localTestInfos;
     }
 
-    
+    /**
+     * Get the list of  TestInfo objects that are available for download.
+     * @return list of TestInfo objects that are downloadbale.
+     */
+    @Override
     public List<TestInfo> getDownloadableTestInfos() {
         return downloadableTestInfos;
     }
 
+    /**
+     * Get the TestInfo object that is currently used.
+     * @return TestInfo object currently used.
+     */
     @Override
     public TestInfo getCurrentTestInfo() {
         return currentTestInfo;
